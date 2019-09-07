@@ -19,7 +19,7 @@ def read_password_json_file(in_pw_file_name):
         user_id_rpjf = pwd_json_object["user_id"]
         my_pass_rpjf = pwd_json_object["my_pass"]
         target_db_rpjf = pwd_json_object["working_db"]
-        return db_string_rpjf, user_id_rpjf, my_pass_rpjf,target_db_rpjf
+        return db_string_rpjf, user_id_rpjf, my_pass_rpjf, target_db_rpjf
 
 
 def input_login_elements(in_file_ile):
@@ -33,11 +33,11 @@ def input_login_elements(in_file_ile):
     pw_df_creator_dict = {'db_string': db_string_ile, 'user_id': user_id_ile, 'my_pass': my_pass_ile}
     with open(in_file_ile, 'w', encoding='utf-8') as in_file_ile_file_object:
         json.dump(pw_df_creator_dict, in_file_ile_file_object)
-    return (True)
+    return True
 
 
 # This is the main function
-def aws_login_credentials(pw_file_name_ls):
+def awlc(pw_file_name_ls,askok=False):
     """
 
     :param pw_file_name_ls: a filename for the text login
@@ -58,14 +58,21 @@ def aws_login_credentials(pw_file_name_ls):
         # Check that the info is what the user wants
         # if not then call the login elements function again
         # and return the reading of the results as the tope
-        print("Current user information exists")
-        db_string, user_id, my_pass = read_password_json_file(pw_file_name_ls)
-        my_pass_masked = len(my_pass) * '*'
-        print(f'db_string_is:{db_string} \nYour User ID is {user_id} \nYour password is {my_pass_masked}\n Target Database is ')
-        proceed = input("Go forward with this information [Y/N]:").lower()
-        if proceed == "y":
-            return (db_string, user_id, my_pass)
+        if askok:
+            print("Current user information exists")
+            db_string, user_id, my_pass, working_db  = read_password_json_file(pw_file_name_ls)
+            my_pass_masked = len(my_pass) * '*'
+            print(
+                f'db_string:{db_string} \tYour User ID is {user_id} \tYour password is',
+                f'{my_pass_masked}\t Target Database is {working_db}')
+
+        if askok:
+            proceed = input("Go forward with this information [Y/N]:").lower()
+            if proceed == "y":
+                return (db_string, user_id, my_pass,working_db)
+            else:
+                input_login_elements(pw_file_name_ls)
+                return read_password_json_file(pw_file_name_ls)
         else:
-            input_login_elements(pw_file_name_ls)
-            return (read_password_json_file(pw_file_name_ls))
+            return read_password_json_file(pw_file_name_ls)
 

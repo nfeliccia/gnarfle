@@ -122,14 +122,3 @@ def indeed_rss_search(in_keywordz, in_location_zip):
     search_result_dataframe.drop_duplicates(['guid'], inplace=True)
     return search_result_dataframe
 
-
-# -------------------------------------------------------
-
-keywordz = 'data+analyst'
-location_zip = '19124'
-sr_df = indeed_rss_search(keywordz, location_zip)
-print(sr_df.columns)
-print(sr_df.head())
-print(sr_df.shape)
-print(sr_df.dtypes)
-sr_df.to_csv('E:\Software\gnarfle\isf_tmp.csv')
