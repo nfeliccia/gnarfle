@@ -1,124 +1,137 @@
+"""
+This module takes in a  class "Serch" from indeed search executer, and executes it!
+"""
+import datetime
+import re
+
+# For the Beautiful Soup stuff
 import requests
 from bs4 import BeautifulSoup
-import re
-import pandas as pd
-import os
+# For the SQL Achemy Stuff
+from sqlalchemy import Integer, String, Date, DateTime, Boolean, Float, Column, create_engine, text
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-""" The purpose of this module is to take in keywords, location and return a panndas df"""
+# from my own special collection
+from aws_login_credentials import awlc
 
-
-def de_html_a_block(in_text):
-    """re
-    This block is here to remove any stray HTML that could be left in a description.
-    I put in a print statement to see if it was called, and boy was it called 9/3/2019
-    :param in_text:string
-    :return: out_text:string
-    """
-    out_text = re.sub(r'<br>', '', in_text)
-    return out_text
+# declare the class for incoming base
+Base = declarative_base()
 
 
-def desciption_clean(in_text):
-    excess_snippet = re.search(' - ', in_text, re.UNICODE).start()
-    mid_text = in_text[:excess_snippet]
-    out_text = re.sub(fr'[^a-zA-Z0-9{chr(32)}\-]', '', mid_text)
-    return out_text
+class Serch(Base):
+    __tablename__ = 'indeed_search_set'
+    iss_pk = Column(Integer, primary_key=True)
+    search_keyword_list = Column(String)
+    search_zip_code = Column(String)
+    creation_date = Column(Date)
+    search_completed = Column(Boolean)
+    search_run_date = Column(Date)
 
 
-def job_title_clean(in_text):
-    out_text = re.sub(fr'[^a-zA-Z0-9{chr(32)}\-]', ' ', in_text)
-    return out_text
+class Rezult(Base):
+    __tablename__ = 'indeed_search_results'
+    isr_pk = Column(Integer, primary_key=True)
+    iss_pk = Column(Integer)
+    guid = Column(String)
+    publish_date = Column(DateTime)
+    latitude = Column(Float)
+    longitude = Column(Float)
+    company = Column(String)
+    extracted_url = Column(String)
+    scraped = Column(Boolean)
+    job_title_row = Column(String)
+
+    def trim_indeed_url(self):
+        """
+        When a URL is reutrned in the XML, it has a lot of extra characters in it.   There are several reasons we want to
+        simplify the URL. 1) Remove any identifying information  2) Ease of Storage  Note, I do leave in the from=rss
+        text because If Indeed is counting usage of the RSS, I don't want it to go away.
+        :param self: text
+        :return: out_url:text
+        """
+        jk_snippet = re.search('jk=', self).start()
+        rtk_snippet = re.search('&rtk=', self).start()
+        front_snippet = self[0:30]
+        out_url = f'{front_snippet}{self[jk_snippet:rtk_snippet]}&from=rss'
+        return out_url
+
+    def map_bs_to_class(self, in_search_item):
+        self.job_title_row = in_search_item[0].string
+        self.extracted_url = Rezult.trim_indeed_url(in_search_item[2].string)
+        self.company = in_search_item[4].string
+        self.guid = in_search_item[5].string
+        self.latitude = float(in_search_item[8].string.split(' ')[0])
+        self.longitude = float(in_search_item[8].string.split(' ')[1])
+        self.publish_date = datetime.datetime.strptime(in_search_item[6].string, f'%a, %d %b %Y %H:%M:%S GMT')
+        self.scraped = False
+        self.iss_pk = test_dict['iss_pk']
 
 
-def trim_indeed_url(in_url):
-    """
-    When a URL is reutrned in the XML, it has a lot of extra characters in it.   There are several reasons we want to
-    simplify the URL. 1) Remove any identifying information  2) Ease of Storage  Note, I do leave in the from=rss
-    text because If Indeed is counting usage of the RSS, I don't want it to go away.
-    :param in_url: text
-    :return: out_url:text
-    """
-    jk_snippet = re.search('jk=', in_url).start()
-    rtk_snippet = re.search('&rtk=', in_url).start()
-    front_snippet = in_url[0:30]
-    out_url = f'{front_snippet}{in_url[jk_snippet:rtk_snippet]}&from=rss'
-    return out_url
+def create_pg_login_string():
+    login_file = 'login_info.json'
+    login_credentials_tuple = awlc(login_file, askok=False)
+    db_string = login_credentials_tuple[0]
+    user_id = login_credentials_tuple[1]
+    password = login_credentials_tuple[2]
+    working_db = login_credentials_tuple[3]
+    return f'postgres+psycopg2://{user_id}:{password}@{db_string}:5432/{working_db}'
 
 
-def squeeze_out_the_good_data(in_bs_thing):
-    """
-    This takes in the basic unit of xml for a job description Item and parses it out.
-    The job title usually contans  Job Title - Posting Company - zip.
-    I split this up
-    the guid seems to be a unique id on search results which isused for de duping later and makes a convenient unique id
-    At this point I'm just leaving the publish date as text and not parsing it.
-    The short description should later be the meat of what we mine for keywords.
-    Interestingly, indeed passes along the lat/long of the town which I split and convert to float
-    All the information is concatenated into a list to be used later in DataFrame Creation
-    :param in_bs_thing:Beautiful Soup .Tag Object
-    :return: list with parsed data in columns for dataframe creation.
-    """
-    job_title = job_title_clean(in_bs_thing.title.text)
-    # Split job title up into the 3 components
-    job_title_split = job_title.split(' - ')
-    real_job_title = job_title_split[0]
-    company = job_title_split[1]
-    search_zip = job_title_split[2]
-    guid = in_bs_thing.guid.text[:10]
-    source = in_bs_thing.source.text
-    publish_date = in_bs_thing.pubdate.text
-    short_decription = de_html_a_block(in_bs_thing.description.text)
-    shorter_description = desciption_clean(short_decription)
-    lat_lon = in_bs_thing.find('georss:point').text.split(' ')
-    lat = float(lat_lon[0])
-    long = float(lat_lon[1])
-    extracted_url = trim_indeed_url(in_bs_thing.contents[2])
-    all_the_columns = [guid, job_title, real_job_title, company, search_zip, source, publish_date, shorter_description,
-                       lat, long, extracted_url]
-    return all_the_columns
+# headers for the Browser.
+# split up to keep on one line.
+user_agent_pt_1 = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
+user_agent_pt_2 = '(KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
+headers = {'User-Agent': user_agent_pt_1 + user_agent_pt_2}
 
 
-def indeed_rss_search(in_keywordz, in_location_zip):
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'}
-    # The indeed listing shows 10 pages at a time. I set a page num max as a variable her on the number of results
-    long_item_list = []
-    data_frame_builder = []
-    search_result_columns = ['guid', 'job_title_row', 'real_job_title', 'company', 'in_location_zip', 'listing_source',
-                             'publish_date', 'short_description', 'lat', 'longitude', 'extracted_url', 'scraped']
+# This module will have a Serch class passed to it.
+def isf(in_serch):
+    # initiate the database_session I really gotta slim this down
+    db_string = create_pg_login_string()
+    db_six_cyl_engine = create_engine(db_string, echo=False)
+    DatabaseSession = sessionmaker()
+    session_with_remulak = DatabaseSession(bind=db_six_cyl_engine)
 
-    # Run through and grab the RSS for the key words and location 10 at a time
-    # Append to a list
-    print(f'downloading results for {in_keywordz}')
+    # This loop scans for result pages 10 at a time , just like indeed puts out.
+    # Start at page 0
     page_num = 0
-    results_still_coming = True
-    while results_still_coming:
-        session = requests.Session()
-        page = f"http://rss.indeed.com/rss?q={chr(34)}{in_keywordz}{chr(34)}&l={in_location_zip}&start=" + str(page_num)
-        pageTree = session.get(page, headers=headers)
+    keep_searching = True
+
+    # create a session from the Requests module (not to be confused with a sql alechmy session)
+    beautiful_soup_session = requests.Session()
+    while keep_searching:
+        # build the page as an f string from the search_Keyword List and search_zip_code
+        page = f"http://rss.indeed.com/rss?q={chr(34)}{test_Serch.search_keyword_list}{chr(34)}&l={test_Serch.search_zip_code}&start=" + str(
+            page_num)
+        pageTree = beautiful_soup_session.get(page, headers=headers)
         pageSoup = BeautifulSoup(pageTree.content, 'html5lib')
-        rss = pageSoup.find_all('item')
-        # Trap a null result and make the output an empty set
-        # The page_num can be adjusted for the depth of results.
-        if len(rss) == 0 or page_num > 1000:
-            results_still_coming = False
+        indeed_twenty_block = pageSoup.find_all('item')
+        if len(indeed_twenty_block) == 20 and (page_num < 500):
+            for job_listing in indeed_twenty_block:
+                this_rezult = Rezult()
+                this_rezult.map_bs_to_class(job_listing.contents)
+                session_with_remulak.add(this_rezult)
+                session_with_remulak.flush()
+            page_num += 20
         else:
-            long_item_list.extend(rss)
-            page_num += 10
+            keep_searching = False
 
-    # if no results are found, throw error and then
-    if len(long_item_list) < 1:
-        raise ValueError(f'No Results Found for {in_keywordz}')
-    else:
-        for each_block in long_item_list:
-            try:
-                incremental_line = squeeze_out_the_good_data(each_block)
-                incremental_line.append(False)
-                data_frame_builder.append(incremental_line)
-            except IndexError:
-                print('Bad Data Handled')
+    # clean up the duplicates
+    sql_pt_1 = 'WITH singled_out as (select distinct ON (guid) guid,isr_pk from indeed_search_results) '
+    sql_pt_2 = 'DELETE FROM indeed_search_results WHERE indeed_search_results.isr_pk NOT IN '
+    sql_pt_3 = '(SELECT singled_out.isr_pk FROM singled_out);  '
+    full_query = text(sql_pt_1 + sql_pt_2 + sql_pt_3)
+    db_six_cyl_engine.execute(full_query)
+    session_with_remulak.commit()
+    session_with_remulak.close()
 
-    search_result_dataframe = pd.DataFrame.from_records(data_frame_builder, columns=search_result_columns)
-    search_result_dataframe.drop_duplicates(['guid'], inplace=True)
-    return search_result_dataframe
 
+# This will be a test value we use while creating
+test_dict = {'iss_pk': 8, 'search_keyword_list': 'account+executive', 'search_zip_code': '30303',
+             'creation_date': datetime.date(2019, 9, 10), 'search_completed': False,
+             'search_run_date': datetime.datetime.now()}
+
+test_Serch = Serch(**test_dict)
+print(test_Serch.search_keyword_list, test_Serch.search_zip_code)
+isf(test_Serch)
