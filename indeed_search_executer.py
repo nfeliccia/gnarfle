@@ -12,13 +12,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # This is my own login module
-from aws_login_credentials import awlc
+from blunt_skull_tools import create_pg_login_string
 from indeed_search_function import isf
 
 # This tells SQL Alchemny that I'm going to declare some jawns.
 Base = declarative_base()
-
-
 # This creates a class which mirrors the construction of the table indeed_search_set.
 class Serch(Base):
     __tablename__ = 'indeed_search_set'
@@ -30,28 +28,12 @@ class Serch(Base):
     search_run_date = Column(DateTime)
 
 
-def create_pg_login_string():
-    """
-    This function takes no input, reads the login file, parses the information and
-    concatenates it into a string for the postress engine to use.
-    :return: string
-    """
-    # The login credentials tuple contains db_string, username, password, working_db
-    # the ask ok flag bypasses the asking if the login credentials are OK becuase
-    # continually entering y in development is a pain in the butt.
-    login_file = 'login_info.json'
-    login_credentials_tuple = awlc(login_file, askok=False)
-    aws_db_url = login_credentials_tuple[0]
-    user_id = login_credentials_tuple[1]
-    password = login_credentials_tuple[2]
-    working_db = login_credentials_tuple[3]
-    return f'postgres+psycopg2://{user_id}:{password}@{aws_db_url}:5432/{working_db}'
-
-
 # Start here  #
+# create the engine
 db_string = create_pg_login_string()
 db_six_cyl_engine = create_engine(db_string, echo=False)
 conexion = db_six_cyl_engine.connect()
+# use SQL Alchemy to pull the metadata for the database down.
 metadata = MetaData(db_six_cyl_engine)
 
 # Declare the class to mirror the table structure.
