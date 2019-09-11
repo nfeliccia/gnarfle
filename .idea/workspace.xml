@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/blunt_skull_tools.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/iss_template.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/~$G_implementation.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blunt_skull_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/blunt_skull_tools.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/indeed_search_executer.py" beforeDir="false" afterPath="$PROJECT_DIR$/indeed_search_executer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/indeed_search_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/indeed_search_function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/indeed_search_set_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/indeed_search_set_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iss_template.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/iss_template.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -162,8 +161,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.indeed_search_executer" />
-        <item itemvalue="Python.indeed_search_function" />
         <item itemvalue="Python.indeed_search_set_builder" />
+        <item itemvalue="Python.indeed_search_function" />
         <item itemvalue="Python.indeed_search_function_01" />
         <item itemvalue="Python.aws_login_credentials" />
       </list>
