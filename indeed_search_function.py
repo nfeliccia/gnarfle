@@ -19,6 +19,7 @@ from aws_login_credentials import awlc
 Base = declarative_base()
 
 
+# This creates the same class as the incoming Serch in this program
 class Serch(Base):
     __tablename__ = 'indeed_search_set'
     iss_pk = Column(Integer, primary_key=True)
@@ -26,7 +27,7 @@ class Serch(Base):
     search_zip_code = Column(String)
     creation_date = Column(Date)
     search_completed = Column(Boolean)
-    search_run_date = Column(Date)
+    search_run_date = Column(DateTime)
 
 
 class Rezult(Base):
@@ -56,7 +57,7 @@ class Rezult(Base):
         out_url = f'{front_snippet}{self[jk_snippet:rtk_snippet]}&from=rss'
         return out_url
 
-    def map_bs_to_class(self, in_search_item):
+    def map_bs_to_class(self, in_search_item,isr_key):
         self.job_title_row = in_search_item[0].string
         self.extracted_url = Rezult.trim_indeed_url(in_search_item[2].string)
         self.company = in_search_item[4].string
@@ -65,7 +66,7 @@ class Rezult(Base):
         self.longitude = float(in_search_item[8].string.split(' ')[1])
         self.publish_date = datetime.datetime.strptime(in_search_item[6].string, f'%a, %d %b %Y %H:%M:%S GMT')
         self.scraped = False
-        self.iss_pk = test_dict['iss_pk']
+        self.iss_pk = isr_key
 
 
 def create_pg_login_string():
@@ -86,7 +87,7 @@ headers = {'User-Agent': user_agent_pt_1 + user_agent_pt_2}
 
 
 # This module will have a Serch class passed to it.
-def isf(in_serch):
+def isf(in_serch: Serch):
     # initiate the database_session I really gotta slim this down
     db_string = create_pg_login_string()
     db_six_cyl_engine = create_engine(db_string, echo=False)
@@ -100,17 +101,18 @@ def isf(in_serch):
 
     # create a session from the Requests module (not to be confused with a sql alechmy session)
     beautiful_soup_session = requests.Session()
+    print(f'Search Row{in_serch.iss_pk} being executed...')
     while keep_searching:
         # build the page as an f string from the search_Keyword List and search_zip_code
-        page = f"http://rss.indeed.com/rss?q={chr(34)}{test_Serch.search_keyword_list}{chr(34)}&l={test_Serch.search_zip_code}&start=" + str(
+        page = f"http://rss.indeed.com/rss?q={chr(34)}{in_serch.search_keyword_list}{chr(34)}&l={in_serch.search_zip_code}&start=" + str(
             page_num)
-        pageTree = beautiful_soup_session.get(page, headers=headers)
-        pageSoup = BeautifulSoup(pageTree.content, 'html5lib')
-        indeed_twenty_block = pageSoup.find_all('item')
-        if len(indeed_twenty_block) == 20 and (page_num < 500):
+        page_tree = beautiful_soup_session.get(page, headers=headers)
+        page_soup = BeautifulSoup(page_tree.content, 'html5lib')
+        indeed_twenty_block = page_soup.find_all('item')
+        if len(indeed_twenty_block) == 20 and (page_num < 50):
             for job_listing in indeed_twenty_block:
                 this_rezult = Rezult()
-                this_rezult.map_bs_to_class(job_listing.contents)
+                this_rezult.map_bs_to_class(job_listing.contents,in_serch.iss_pk)
                 session_with_remulak.add(this_rezult)
                 session_with_remulak.flush()
             page_num += 20
@@ -123,15 +125,15 @@ def isf(in_serch):
     sql_pt_3 = '(SELECT singled_out.isr_pk FROM singled_out);  '
     full_query = text(sql_pt_1 + sql_pt_2 + sql_pt_3)
     db_six_cyl_engine.execute(full_query)
+
+    # commit and quit!
     session_with_remulak.commit()
     session_with_remulak.close()
-
+    in_serch.search_completed = True
+    in_serch.search_run_date = datetime.datetime.now()
+    return in_serch
 
 # This will be a test value we use while creating
-test_dict = {'iss_pk': 8, 'search_keyword_list': 'account+executive', 'search_zip_code': '30303',
-             'creation_date': datetime.date(2019, 9, 10), 'search_completed': False,
-             'search_run_date': datetime.datetime.now()}
-
-test_Serch = Serch(**test_dict)
-print(test_Serch.search_keyword_list, test_Serch.search_zip_code)
-isf(test_Serch)
+# t+executive', 'search_zip_code': '30303',
+# , 'search_completed': False,
+#
