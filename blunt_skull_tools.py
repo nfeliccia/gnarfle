@@ -1,11 +1,16 @@
-from aws_login_credentials import awlc
-from sqlalchemy import Integer, String, Date, DateTime, Boolean, MetaData, Column, create_engine, Float
+import datetime
+import re
+import pandas as pd
+
+from bs4 import NavigableString
+from sqlalchemy import Integer, String, Date, DateTime, Boolean, Column, create_engine, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import re
-import datetime
+
+from aws_login_credentials import awlc
 
 Base = declarative_base()
+
 
 class Serch(Base):
     __tablename__ = 'indeed_search_set'
@@ -15,6 +20,7 @@ class Serch(Base):
     search_keyword_list = Column(String)
     search_run_date = Column(DateTime)
     search_zip_code = Column(String)
+
 
 class Rezult(Base):
     __tablename__ = 'indeed_search_results'
@@ -55,6 +61,22 @@ class Rezult(Base):
         self.iss_pk = isr_key
 
 
+class Text_Process(Base):
+    __tablename__ = 'text_processing_queue'
+    isr_pk = Column(Integer)
+    tpq_pk = Column(Integer, primary_key=True)
+    job_description = Column(String)
+    jd_processed = Column(Boolean)
+
+
+class Porpus_dictinary(Base):
+    __tablename__ = "corpus_dictionary"
+    cd_pk = Column(Integer, primary_key=True)
+    phrase = Column(String)
+    phrase_count = Column(Integer)
+    isr_pk = Column(Integer)
+
+
 def create_pg_login_string():
     """
     This function takes no input, reads the login file, parses the information and
@@ -72,12 +94,14 @@ def create_pg_login_string():
     working_db = login_credentials_tuple[3]
     return f'postgres+psycopg2://{user_id}:{password}@{aws_db_url}:5432/{working_db}'
 
+
 def create_headers_for_the_browser():
     # headers for the Browser.
     # split up to keep on one line.
     user_agent_pt_1 = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
     user_agent_pt_2 = '(KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
     return {'User-Agent': user_agent_pt_1 + user_agent_pt_2}
+
 
 def start_a_sql_alchemy_session():
     """ This starts  a session using SQL Alchemy tools
@@ -87,3 +111,25 @@ def start_a_sql_alchemy_session():
     db_six_cyl_engine = create_engine(db_string, echo=False)
     DatabaseSession = sessionmaker()
     return DatabaseSession(bind=db_six_cyl_engine)
+
+
+def bs_showit(in_bsthing, print_it_out=False):
+    if print_it_out:
+        if isinstance(in_bsthing, NavigableString):
+            print(in_bsthing.string)
+        else:
+            print(in_bsthing.text)
+    else:
+        if isinstance(in_bsthing, NavigableString):
+            return in_bsthing.string
+        else:
+            return in_bsthing.text
+
+def build_search_set_from_xls():
+    db_string = create_pg_login_string()
+    db_six_cyl_engine = create_engine(db_string, echo=False)
+    iss_template_filename = r'iss_template.xlsx'
+    iss_template_df = pd.read_excel(iss_template_filename)
+    iss_template_df = iss_template_df.astype({'search_keyword_list': str, 'search_zip_code': str})
+    iss_template_df['search_run_date'] = pd.to_datetime(iss_template_df['search_run_date'],format='%m/%d/%Y')
+    iss_template_df.to_sql('indeed_search_set',con=db_six_cyl_engine,if_exists='append',index=False)

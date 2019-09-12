@@ -21,7 +21,6 @@ def isf(in_serch: bst.Serch):
     page_num = 0
     keep_searching = True
     headers = bst.create_headers_for_the_browser()
-
     # create a session from the Requests module (not to be confused with a sql alchemy session)
     beautiful_soup_session = requests.Session()
     print(f'Search Row{in_serch.iss_pk} being executed...')

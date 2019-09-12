@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/description_to_count_set.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/job_description_reader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/~$G_implementation.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blunt_skull_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/blunt_skull_tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_initial_search_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/build_initial_search_db.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/indeed_search_executer.py" beforeDir="false" afterPath="$PROJECT_DIR$/indeed_search_executer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/indeed_search_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/indeed_search_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indeed_search_set.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/indeed_search_set.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/indeed_search_set_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/indeed_search_set_builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iss_template.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/iss_template.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,11 +37,12 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Software\gnarfle\SQL" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Software\gnarfle" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Software\gnarfle\depricated_code" />
+      <recent name="E:\Software\gnarfle\SQL" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -52,8 +57,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.indeed_search_executer">
-    <configuration name="aws_login_credentials" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.description_to_count_set">
+    <configuration name="description_to_count_set" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -65,7 +70,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/aws_login_credentials.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/description_to_count_set.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -158,13 +163,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="job_description_reader" type="PythonConfigurationType" factoryName="Python">
+      <module name="gnarfle" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/job_description_reader.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.description_to_count_set" />
         <item itemvalue="Python.indeed_search_executer" />
         <item itemvalue="Python.indeed_search_set_builder" />
         <item itemvalue="Python.indeed_search_function" />
         <item itemvalue="Python.indeed_search_function_01" />
-        <item itemvalue="Python.aws_login_credentials" />
       </list>
     </recent_temporary>
   </component>
@@ -210,6 +236,9 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints-defaults>
+        <breakpoint type="python-line" />
+      </breakpoints-defaults>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
