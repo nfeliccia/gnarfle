@@ -29,7 +29,7 @@ def job_description_reader():
     yet_to_be_scraped_group = session_with_remulak.query(bst.Rezult).filter_by(scraped=False).order_by('isr_pk')
     for yet_to_be_scraped in yet_to_be_scraped_group:
         page_tree = beautiful_soup_session.get(yet_to_be_scraped.extracted_url, headers=headers)
-        print(f'now serving {yet_to_be_scraped.isr_pk}')
+        print(f'now scraping {yet_to_be_scraped.isr_pk} - {yet_to_be_scraped.job_title_row}')
         single_job_soup = BeautifulSoup(page_tree.content, 'lxml')
         this_desc_out = bst.Text_Process()
         # get job title
@@ -56,6 +56,7 @@ def job_description_reader():
         yet_to_be_scraped.job_title_row = job_title
         this_desc_out.isr_pk = yet_to_be_scraped.isr_pk
         this_desc_out.job_description = seed_text
+        this_desc_out.jd_processed=False
         session_with_remulak.add(this_desc_out)
         session_with_remulak.flush()
 
