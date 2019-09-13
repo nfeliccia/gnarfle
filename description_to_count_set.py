@@ -30,7 +30,7 @@ def parse_description_to_words_and_count():
     # perform the query to get the unprocessed textizes.
     yet_to_be_parsed_group = session_with_remulak.query(bst.Text_Process).filter_by(jd_processed=False).order_by('tpq_pk')
     loop_start_time = time.time()
-    for yet_to_be_parsed in yet_to_be_parsed_group[0:900]:
+    for yet_to_be_parsed in yet_to_be_parsed_group[0:10]:
         # split it on the new lines because sentence tokenizer doen't do well on line breaks.
         working_jd = yet_to_be_parsed.job_description.split('\n')
         # Tokenize each phrase - problem is that it comes out as a list.
@@ -63,11 +63,13 @@ def parse_description_to_words_and_count():
             this_corpus_dict.phrase_count = item[1]
             session_with_remulak.add(this_corpus_dict)
             yet_to_be_parsed.jd_processed = True
+            session_with_remulak.flush()
 
         print(f'{yet_to_be_parsed.isr_pk} parsed {time.time()-loop_start_time}')
     print("Start Upload",time.time()-loop_start_time)
     session_with_remulak.commit()
     session_with_remulak.close()
     print ("Finish Upload" ,time.time() - loop_start_time)
+
 
 parse_description_to_words_and_count()
