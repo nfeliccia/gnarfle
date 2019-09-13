@@ -2,7 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/September+2019+Speaker+Series+.ics" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aws_login_credentials.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blunt_skull_tools.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_table_indeed_search_set.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/description_to_count_set.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forbidden_words_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/forbidden_words_list.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forbidden_words_uploader.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indeed_keyword_set.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indeed_search_executer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indeed_search_function.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indeed_search_set - Copy.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indeed_search_set.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indeed_search_set_builder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/isf_tmp.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iss_template.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/iss_template.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/job_description_reader.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/login_info.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sherpa.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql_alchemy_examples.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +76,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.description_to_count_set">
+  <component name="RunManager" selected="Python.sherpa">
     <configuration name="build_search_set_from_xls" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -184,8 +205,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.description_to_count_set" />
         <item itemvalue="Python.sherpa" />
+        <item itemvalue="Python.description_to_count_set" />
         <item itemvalue="Python.forbidden_words_uploader" />
         <item itemvalue="Python.build_search_set_from_xls" />
         <item itemvalue="Python.indeed_search_executer" />

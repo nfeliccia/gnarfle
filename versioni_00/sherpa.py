@@ -12,7 +12,7 @@ def add_in_the_excel():
     db_six_cyl_engine_aite = create_engine(db_string_aite, echo=False)
     conexion_aite = db_six_cyl_engine_aite.connect()
     iss_template_df = pd.read_excel('iss_template.xlsx')
-    iss_template_df.to_sql('indeed_search_', con=conexion_aite, if_exists='append', index=False)
+    iss_template_df.to_sql('indeed_search_set', con=conexion_aite, if_exists='append', index=False)
     conexion_aite.close()
 
 
@@ -22,17 +22,15 @@ def check_the_search_set():
     print(f"Currently there are {count_of_phrases_to_search_css} searches in the keyword search queue ")
     if count_of_phrases_to_search_css == 0:
         print("All caught up on Searches")
-        return False
+    import_from_excel_sheet = input('Do you want to import the searches on the Excel Sheet?:[y/n]')
+    if import_from_excel_sheet.lower() == 'y':
+        print("You typed Y")
+        add_in_the_excel()
+        session_with_remulak_css.close()
+        return True
     else:
-        import_from_excel_sheet = input('Do you want to import the searches on the Excel Sheet?:[y/n]')
-        if import_from_excel_sheet.lower() == 'y':
-            print("You typed Y")
-            add_in_the_excel()
-            session_with_remulak_css.close()
-            return True
-        else:
-            session_with_remulak_css.close()
-            return True
+        session_with_remulak_css.close()
+        return True
 
 
 def check_the_search_results():

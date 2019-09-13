@@ -70,6 +70,3 @@ def parse_description_to_words_and_count():
     session_with_remulak.commit()
     session_with_remulak.close()
     print ("Finish Upload" ,time.time() - loop_start_time)
-
-
-parse_description_to_words_and_count()
