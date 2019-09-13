@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/September+2019+Speaker+Series+.ics" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GtG_implementation.docx" beforeDir="false" afterPath="$PROJECT_DIR$/GtG_implementation.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/description_to_count_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/description_to_count_set.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$G_implementation.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
