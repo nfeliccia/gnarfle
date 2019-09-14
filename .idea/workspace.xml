@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/aws_login_credentials.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garfle_module_01.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garfle_module_02.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login_info.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/meeting-109284582.ics" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nltk_practice.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gnarfle_module_bst.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GTG Engineering Notebook.docx" beforeDir="false" afterPath="$PROJECT_DIR$/GTG Engineering Notebook.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/garfle_module_01.py" beforeDir="false" afterPath="$PROJECT_DIR$/garfle_module_01.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/indeed_search_set.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/indeed_search_set.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/aws_login_credentials.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/login_info.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$G Engineering Notebook.docx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,13 +37,13 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Software\gnarfle" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Software\gnarfle\depricated_code" />
       <recent name="E:\Software\gnarfle" />
       <recent name="E:\Software\gnarfle\SQL" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Software\gnarfle" />
     </key>
   </component>
   <component name="RunDashboard">
