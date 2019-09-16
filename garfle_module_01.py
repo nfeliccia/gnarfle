@@ -37,6 +37,7 @@ def query_indeed_and_grab_a_jobs_result_set(in_series, in_page_num):
     indeed_url_part_1 = f"http://rss.indeed.com/rss?q={chr(34)}{in_series.search_keyword_list}{chr(34)}"
     indeed_url_part_2 = f'&l={in_series.search_zip_code}&start={str(in_page_num)}'
     search_results_page = f"{indeed_url_part_1}{indeed_url_part_2}"
+    print(f'Searching {search_results_page}')
     search_results_page_tree = beautiful_soup_session.get(search_results_page,
                                                           headers=bst.create_headers_for_the_browser())
     search_results_page_soup = BeautifulSoup(search_results_page_tree.content, 'lxml')
@@ -67,7 +68,7 @@ def single_job_result_processing(in_single_job_result):
     this_SQLUpload = bst.SQLIndeedSearchResults()
     this_SQLUpload.populate(this_isjr_result, this_indeed_job_description_analysis)
     session_with_remulak.add(this_SQLUpload)
-    print(f"{this_isjr_result.guid} Done \t Currently Searching {indeed_search_row.search_zip_code}")
+    # print(f"{this_isjr_result.guid} Done \t Currently Searching {indeed_search_row.search_zip_code}")
 
 
 # Begin
@@ -81,7 +82,7 @@ for isr_pk, indeed_search_row in read_an_excel_sheet(excel_file, excel_sheet):
         while keep_searching:
             job_result_set = query_indeed_and_grab_a_jobs_result_set(indeed_search_row, page_num)
             # check to make sure positive results are still being received
-            if len(job_result_set) < 8 or page_num > 20:
+            if len(job_result_set) < 2 or page_num > 50:
                 keep_searching = False
             else:
                 page_num += 10
@@ -96,12 +97,4 @@ beautiful_soup_session.close()
 
 print(f'after  commit  {(time.time() - program_start) * 1000} ')
 
-print(f'Dedup Started {(time.time() - program_start) * 1000}')
-sql_pt_1 = 'WITH singled_out as (select distinct ON (guid) guid from indeed_search_results) '
-sql_pt_2 = 'DELETE FROM indeed_search_results WHERE indeed_search_results.guid NOT IN '
-sql_pt_3 = '(SELECT singled_out.guid FROM singled_out);  '
-full_query = text(sql_pt_1 + sql_pt_2 + sql_pt_3)
-session_with_remulak.execute(full_query)
-
-print(f'Dedup ended {(time.time() - program_start) * 1000}')
 session_with_remulak.close()

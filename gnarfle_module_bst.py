@@ -4,8 +4,10 @@ from datetime import datetime
 
 from bs4 import NavigableString
 from sqlalchemy import Integer, String, Date, Float, Column, create_engine
+from sqlalchemy import text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm.session import Session
 
 from aws_login_credentials import awlc
 
@@ -132,7 +134,19 @@ def trim_indeed_url(self):
     out_url = f'{front_snippet}{self[jk_snippet:rtk_snippet]}&from=rss'
     return out_url
 
-
+def dedup_indeed_search_results(in_session: Session) -> object:
+    """
+    This is a routine which removes duplicates from the indeed search results. I put it here so
+    it can be called anywhere.
+    :param in_session:
+    :return: None
+    """
+    sql_pt_1 = 'DELETE FROM indeed_search_results AS a USING (SELECT MIN(isr_pk) as isr_pk, guid FROM indeed_search_results '
+    sql_pt_2 = 'GROUP BY guid HAVING COUNT(*) > 1 ) AS b WHERE a.guid = b.guid'
+    sql_pt_3 = ' AND a.isr_pk <> b.isr_pk;  '
+    full_query = text(sql_pt_1 + sql_pt_2 + sql_pt_3)
+    in_session.execute(full_query)
+    in_session.commit()
 """
 attic
  # print(f'indeed search row {isr_pk} loop started at {(time.time()-program_start)*1000}' )
