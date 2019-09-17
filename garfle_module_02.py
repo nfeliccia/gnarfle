@@ -7,8 +7,8 @@ from nltk.corpus import stopwords
 from pandas import DataFrame, read_sql, ExcelWriter
 from sqlalchemy.orm.query import Query
 
-import gnarfle_module_bst as bst
-from gnarfle_module_bst import SQLIndeedSearchResults as SISR
+import gnarfle_00_bst_tools as bst
+from gnarfle_00_bst_tools import SQLIndeedSearchResults as SISR
 
 # I want to have stems available in the result counts.
 our_stemmer = PorterStemmer()
@@ -34,7 +34,7 @@ def word_frequency_for_a_single_description(in_job_text: str):
     :return: a Counter Object with teh word counts
     """
     # remove all sorts of punctuation to optimize word parsing.
-    job_text_string = re.sub(r'[,.;@#?!&$()/’\':·\-]+\ *', " ", in_job_text)
+    job_text_string = bst.super_clean_a_string(in_job_text)
     # tokenize for counting
     job_text_words = word_tokenize(job_text_string)
     # Turn everything to lower case. Using Casefold as it handels UTF-8 better.

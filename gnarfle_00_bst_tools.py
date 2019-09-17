@@ -1,9 +1,13 @@
+"""
+This file holds all of the classes and common functions
+
+"""
 import datetime
 import re
 from datetime import datetime
 
 from bs4 import NavigableString
-from sqlalchemy import Integer, String, Date, Float, Column, create_engine
+from sqlalchemy import Integer, String, Date, Float, Column, Boolean, create_engine
 from sqlalchemy import text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -27,7 +31,7 @@ class SQLIndeedSearchResults(Base):
     job_text_raw = Column(String)
     job_title = Column(String)
 
-    def populate(self,in_result,in_analysis):
+    def populate(self, in_result, in_analysis):
         self.company = in_result.company
         self.extracted_url = in_result.extracted_url
         self.guid = in_result.guid
@@ -37,6 +41,33 @@ class SQLIndeedSearchResults(Base):
         self.publish_date = in_result.publish_date
         self.job_text_raw = in_analysis.job_text_raw
         self.job_title = in_analysis.job_title
+
+
+class IndeedSearchQueue(Base):
+    __tablename__ = 'indeed_search_queue'
+    isq_pk = Column(Integer, primary_key=True)
+    search_keyword_list = Column(String)
+    creation_date = Column(Date)
+    search_completed = Column(Boolean)
+    search_run_date = Column(Date)
+    search_zip_code = Column(String)
+
+    def __init__(self):
+        self.isq_pk = None
+        self.search_keyword_list=""
+        self.creation_date=None
+        self.search_run_date= None
+        self.search_zip_code=None
+
+
+class ZipCodes(Base):
+    __tablename__ = 'ref_zip_codes'
+    zipcodes_pk = Column(Integer, primary_key=True)
+    zip_code = Column(String)
+    metro_area_name = Column(String)
+    metro_area_rank = Column(Float)
+
+
 
 
 class IndeedJobSearchResult:
@@ -120,6 +151,11 @@ def start_a_sql_alchemy_session():
     return DatabaseSession(bind=db_six_cyl_engine)
 
 
+def super_clean_a_string(in_string:str):
+    out_string = re.sub(r'[,.;@%#?!&$()^*/’\':·\-]+\ *', " ", in_string).rstrip().lstrip().casefold()
+    return out_string
+
+
 def trim_indeed_url(self):
     """
     When a URL is reutrned in the XML, it has a lot of extra characters in it.   There are several reasons we want to
@@ -134,6 +170,7 @@ def trim_indeed_url(self):
     out_url = f'{front_snippet}{self[jk_snippet:rtk_snippet]}&from=rss'
     return out_url
 
+
 def dedup_indeed_search_results(in_session: Session) -> object:
     """
     This is a routine which removes duplicates from the indeed search results. I put it here so
@@ -147,12 +184,3 @@ def dedup_indeed_search_results(in_session: Session) -> object:
     full_query = text(sql_pt_1 + sql_pt_2 + sql_pt_3)
     in_session.execute(full_query)
     in_session.commit()
-"""
-attic
- # print(f'indeed search row {isr_pk} loop started at {(time.time()-program_start)*1000}' )
-                 #     print(f" Guid:{this_isjr_result.guid}\n", f"Job Title Row {this_isjr_result.job_title_row}\n",
-                #           f"Extracted URL {this_isjr_result.extracted_url}\n", f"Company {this_isjr_result.company}\n",
-                #           f"Latitude {this_isjr_result.latitude}", f"Longitude {this_isjr_result.longitude}\n",
-                #           f"Date {this_isjr_result.publish_date}", f"Job Title  {this_indeed_job_description_analysis.job_title}\n",
-                #           f"{job_text_raw} ")
-"""
