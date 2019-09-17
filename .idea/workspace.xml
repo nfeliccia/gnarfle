@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SQL/delete_duplicates_better.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/garfle_module_01.py" beforeDir="false" afterPath="$PROJECT_DIR$/garfle_module_01.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/garfle_module_02.py" beforeDir="false" afterPath="$PROJECT_DIR$/garfle_module_02.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_module_bst.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_module_bst.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/indeed_search_set.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/indeed_search_set.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logininfo.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zipcodes.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/zipcodes.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +50,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.garfle_module_02">
+  <component name="RunManager" selected="Python.garfle_module_01">
     <configuration name="description_to_count_set" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -111,7 +105,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/garfle_module_01.py" />
+      <option name="SCRIPT_NAME" value="E:\Software\gnarfle\gnarfle_from_indeed_to_aws" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -185,8 +179,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.garfle_module_02" />
         <item itemvalue="Python.garfle_module_01" />
+        <item itemvalue="Python.garfle_module_02" />
         <item itemvalue="Python.sherpa" />
         <item itemvalue="Python.description_to_count_set" />
         <item itemvalue="Python.forbidden_words_uploader" />
