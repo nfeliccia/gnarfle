@@ -1,4 +1,3 @@
-import re
 from collections import Counter
 from datetime import datetime as dt2
 
@@ -43,7 +42,7 @@ def word_frequency_for_a_single_description(in_job_text: str):
     job_text_stems = [our_stemmer.stem(word) for word in job_text_words]
     job_text_multiples_list = []
     # I want to create phrases of two to three words
-    for phrase_length in [2, 3]:
+    for phrase_length in range(2,5):
         job_text_multiples = ngrams(job_text_words, phrase_length)
         for multiple in job_text_multiples:
             # turn the multiple from a tuple into a phrase.
@@ -63,13 +62,19 @@ def description_word_frequency_aggregator(in_result: Query):
     :return: pandas data frame
     """
     type(in_result)
+    print(f'\t\tStart building counter results list')
     counter_results_list = [word_frequency_for_a_single_description(in_result.job_text_raw) for in_result in
                             job_title_result_set]
+    print(f'\t\tfinished building counter results list ')
     counter_results_sum = sum(counter_results_list, Counter())
     counter_results_scrubbed = stopwords_scrub(counter_results_sum)
-    result_to_present = counter_results_scrubbed.most_common(250)
+    result_to_present = counter_results_scrubbed.most_common(1000)
     word_count_df = DataFrame(result_to_present, columns=['keyword', 'number_of_hits'])
     return word_count_df
+
+
+def get_the_length(row):
+    return len(row['keyword'])
 
 
 # Start - --------------------
@@ -81,30 +86,38 @@ swr = session_with_remulak
 bst.dedup_indeed_search_results(swr)
 # I set the filename up here so I can do multiple writes without having it change. 
 
-search_set = [('%career%', '%counselor%'), ('%career%', '%coach%'), ('%career%', '%advisor%')]
-
+search_set = [('%python%', '%data%', '%analyst%')]
 
 for search_tuple in search_set:
     # I want to use SQL Alchemy - note the i like here makes it case insensitive.
-    job_title_result_set = swr.query(SISR).filter(SISR.job_title.ilike(search_tuple[0])).filter(
-        SISR.job_title.ilike(search_tuple[1])).order_by(SISR.publish_date.desc())
+    print(f'Testing {search_tuple}')
+    print(f'\tFiltering {search_tuple} ')
+    job_title_result_set = swr.query(SISR.job_title, SISR.job_text_raw).filter(
+        SISR.job_title.ilike(search_tuple[0])).filter(SISR.job_title.ilike(search_tuple[1])).order_by(
+        SISR.publish_date.desc())
+    print(f'\t{job_title_result_set.count()} jobs found')
+    print(f'\tstarting word frequency aggregation')
     job_title_word_count_df = description_word_frequency_aggregator(job_title_result_set)
+    job_title_word_count_df['length'] = job_title_word_count_df.apply(get_the_length, axis=1)
 
+    print(f'\tword frequency aggregation ended. ')
+    print(f'\tstart pulling source data')
+    # create a data frame of all of the jobs which mach the terms in the source title.
+    print(f'\tcreate a data frame of all of the jobs which mach the terms in the source title.')
     job_title_source_data = read_sql(sql=swr.query(SISR).filter(SISR.job_title.ilike(search_tuple[0])).filter(
         SISR.job_title.ilike(search_tuple[1])).order_by(SISR.publish_date.desc()).statement, con=swr.bind)
-
-    job_description_result_set = swr.query(SISR).filter(SISR.job_text_raw.ilike(search_tuple[0])).filter(
-        SISR.job_text_raw.ilike(search_tuple[1]))
-
+    print(f'\tSource jobs pulled')
+    # need top combine the phrases for the filename
     search_phrase = search_tuple[0][1:-1] + '_' + search_tuple[1][1:-1]
-
+    print(f'\tBegin excel output')
     excel_sheet_1 = f'word_{search_phrase}_in_title'
     excel_sheet_2 = f'job_{search_phrase}_in_title'
     filename = f'{dt2.now().year}-{dt2.now().month}-{dt2.now().day}-{dt2.now().hour}-{dt2.now().minute}-{search_phrase}.xlsx'
     with ExcelWriter(filename, engine='xlsxwriter', mode='a+') as my_excel_homeboy:
-        job_title_word_count_df.to_excel(my_excel_homeboy, sheet_name=excel_sheet_1[0:30])
-        job_title_source_data.to_excel(my_excel_homeboy, sheet_name=excel_sheet_2[0:30])
+        job_title_word_count_df.to_excel(my_excel_homeboy, sheet_name=excel_sheet_1[0:30], index_label='Rank')
+        job_title_source_data.to_excel(my_excel_homeboy, sheet_name=excel_sheet_2[0:30], index_label='Rank')
         my_excel_homeboy.save()
-    print(f'{search_tuple} complete')
+        print(f'\tEnd Excel output')
+        print(f'{search_tuple} complete')
 
 session_with_remulak.close()

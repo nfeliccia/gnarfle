@@ -1,5 +1,6 @@
 # IGnore sensitive login info
 login_info.json
+.xlsx
 
 
 #ignore the virutalenv

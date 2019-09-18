@@ -54,10 +54,10 @@ class IndeedSearchQueue(Base):
 
     def __init__(self):
         self.isq_pk = None
-        self.search_keyword_list=""
-        self.creation_date=None
-        self.search_run_date= None
-        self.search_zip_code=None
+        self.search_keyword_list = ""
+        self.creation_date = None
+        self.search_run_date = None
+        self.search_zip_code = None
 
 
 class ZipCodes(Base):
@@ -66,8 +66,6 @@ class ZipCodes(Base):
     zip_code = Column(String)
     metro_area_name = Column(String)
     metro_area_rank = Column(Float)
-
-
 
 
 class IndeedJobSearchResult:
@@ -151,7 +149,7 @@ def start_a_sql_alchemy_session():
     return DatabaseSession(bind=db_six_cyl_engine)
 
 
-def super_clean_a_string(in_string:str):
+def super_clean_a_string(in_string: str):
     out_string = re.sub(r'[,.;@%#?!&$()^*/’\':·\-]+\ *', " ", in_string).rstrip().lstrip().casefold()
     return out_string
 
