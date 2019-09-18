@@ -1,2 +1,6 @@
-# IGnore stuff
+# IGnore sensitive login info
 login_info.json
+
+
+#ignore the virutalenv
+gnarfle_venv/

@@ -157,7 +157,7 @@ program_start = time.time()
 beautiful_soup_session = requests.Session()
 session_with_remulak = bst.start_a_sql_alchemy_session()
 
-
+build_on_the_indeed_search_list()
 
 for isr_pk, indeed_search_row in read_an_excel_sheet(excel_file, excel_sheet):
     try:
