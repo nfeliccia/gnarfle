@@ -18,31 +18,6 @@ from aws_login_credentials import awlc
 Base = declarative_base()
 
 
-class SQLIndeedSearchResults(Base):
-    __tablename__ = 'indeed_search_results'
-    isr_pk = Column(Integer, primary_key=True)
-    company = Column(String)
-    extracted_url = Column(String)
-    guid = Column(String)
-    job_title_row = Column(String)
-    latitude = Column(Float)
-    longitude = Column(Float)
-    publish_date = Column(Date)
-    job_text_raw = Column(String)
-    job_title = Column(String)
-
-    def populate(self, in_result, in_analysis):
-        self.company = in_result.company
-        self.extracted_url = in_result.extracted_url
-        self.guid = in_result.guid
-        self.job_title_row = in_result.job_title_row
-        self.latitude = in_result.latitude
-        self.longitude = in_result.longitude
-        self.publish_date = in_result.publish_date
-        self.job_text_raw = in_analysis.job_text_raw
-        self.job_title = in_analysis.job_title
-
-
 class IndeedSearchQueue(Base):
     __tablename__ = 'indeed_search_queue'
     isq_pk = Column(Integer, primary_key=True)
@@ -60,12 +35,14 @@ class IndeedSearchQueue(Base):
         self.search_zip_code = None
 
 
-class ZipCodes(Base):
-    __tablename__ = 'ref_zip_codes'
-    zipcodes_pk = Column(Integer, primary_key=True)
-    zip_code = Column(String)
-    metro_area_name = Column(String)
-    metro_area_rank = Column(Float)
+class IndeedJobDescriptionAnalysis:
+    def __init__(self):
+        self.job_title = "unknown"
+        self.job_text_raw = ""
+
+    def populate(self, in_soup):
+        self.job_title = in_soup.h3.text
+        self.job_text_raw = in_soup.find('div', {'id': 'jobDescriptionText'}).get_text()
 
 
 class IndeedJobSearchResult:
@@ -90,14 +67,41 @@ class IndeedJobSearchResult:
         self.longitude = float(in_job_result.contents[7].string.split(' ')[1])
 
 
-class IndeedJobDescriptionAnalysis:
-    def __init__(self):
-        self.job_title = "unknown"
-        self.job_text_raw = ""
+class SQLIndeedSearchResults(Base):
+    __tablename__ = 'indeed_search_results'
+    isr_pk = Column(Integer, primary_key=True)
+    company = Column(String)
+    extracted_url = Column(String)
+    guid = Column(String)
+    job_title_row = Column(String)
+    latitude = Column(Float)
+    longitude = Column(Float)
+    publish_date = Column(Date)
+    job_text_raw = Column(String)
+    job_title = Column(String)
 
-    def populate(self, in_soup):
-        self.job_title = in_soup.h3.text
-        self.job_text_raw = in_soup.find('div', {'id': 'jobDescriptionText'}).get_text()
+    def populate(self, in_result, in_analysis):
+        self.company = in_result.company
+        self.extracted_url = in_result.extracted_url
+        self.guid = in_result.guid
+        self.job_title_row = in_result.job_title_row
+        self.latitude = in_result.latitude
+        self.longitude = in_result.longitude
+        self.publish_date = in_result.publish_date
+        self.job_text_raw = in_analysis.job_text_raw
+        self.job_title = in_analysis.job_title
+
+class Whack_Words(Base):
+    __tablename__ = 'ref_whack_words'
+    ww_pk = Column(Integer, primary_key=True)
+    whack_word = Column(String)
+
+class ZipCodes(Base):
+    __tablename__ = 'ref_zip_codes'
+    zipcodes_pk = Column(Integer, primary_key=True)
+    zip_code = Column(String)
+    metro_area_name = Column(String)
+    metro_area_rank = Column(Float)
 
 
 def bs_showit(in_bsthing, print_it_out=False):
@@ -202,7 +206,7 @@ def trim_indeed_url(self):
     return out_url
 
 
-def dedup_indeed_search_results(in_session: Session) :
+def dedup_indeed_search_results(in_session: Session):
     """
     This is a routine which removes duplicates from the indeed search results. I put it here so
     it can be called anywhere.

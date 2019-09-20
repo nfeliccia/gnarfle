@@ -55,7 +55,16 @@ def make_a_comparison_file_name(in_keyword_counter_list: list):
 
 
 def stopwords_scrub(in_counter: Counter):
-    words_to_whack = set(stopwords.words('english'))
+
+    # I start with the english stopwords
+    words_to_whack = stopwords.words('english')
+    # Query from the database the current stopword list. I'm keeping the stopword list on the db for easy uprade
+    whack_words_query = swr.query(bst.Whack_Words.whack_word)
+    # I combined the .all with the query and the list iterator because the query comes back as a list of tuples.
+    whack_words_list = [word_tuple[0] for word_tuple in whack_words_query.all()]
+    words_to_whack.extend(whack_words_list)
+    # I sort so the shortest words and presumably the most frequent will be at the beginning of the list and caught first.
+    words_to_whack.sort(key=len)
     out_counter = in_counter.copy()
     for element in out_counter.copy():
         if element in words_to_whack:

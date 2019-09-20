@@ -39,3 +39,12 @@ def create_the_zip_codes_table():
     zipcodes_df = pd.read_excel('zipcodes.xlsx').astype({'zip_code': str})
     del zipcodes_df['Text']
     zipcodes_df.to_sql('ref_zip_codes',session_with_remulak.bind,index=True,index_label='zipcodes_pk')
+
+def whack_words_table():
+    session_with_remulak = bst.start_a_sql_alchemy_session()
+    zipcodes_df = pd.read_excel('whack_words.xlsx').astype({'whack_word': str})
+    zipcodes_df.to_sql('ref_whack_words',session_with_remulak.bind,index=True,index_label='whackword_pk')
+
+
+
+whack_words_table()

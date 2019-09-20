@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/comparisonpython_.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python-15.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whack_words_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQL/corpus_processing.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/garfle_module_02.py" beforeDir="false" afterPath="$PROJECT_DIR$/garfle_module_02.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/garfle_module_02.py" beforeDir="false" afterPath="$PROJECT_DIR$/garfle_module_02_parse_for_job_titles.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gnarfle_00_bst_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_00_bst_tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_01_from_indeed_to_aws.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_01_from_indeed_to_aws.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indeed_search_set.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zipcodes.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gnarfle_one_shots.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_one_shots.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whack_words.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/whack_words.xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,13 +35,13 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Software\gnarfle" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Software\gnarfle\depricated_code" />
       <recent name="E:\Software\gnarfle" />
       <recent name="E:\Software\gnarfle\SQL" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Software\gnarfle" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -55,49 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gnarfle_01_from_indeed_to_aws">
-    <configuration name="build_an_indeed_search_list" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="gnarfle" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/build_an_indeed_search_list.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="garfle_module_01" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="gnarfle" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\Software\gnarfle\gnarfle_01_from_indeed_to_aws.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.garfle_module_02_parse_for_job_titles">
     <configuration name="garfle_module_02" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,7 +69,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/garfle_module_02.py" />
+      <option name="SCRIPT_NAME" value="E:\Software\gnarfle\garfle_module_02_parse_for_job_titles.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="garfle_module_02_parse_for_job_titles" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="gnarfle" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/garfle_module_02_parse_for_job_titles.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -140,6 +120,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="gnarfle_one_shots" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="gnarfle" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gnarfle_one_shots.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="job_description_reader" type="PythonConfigurationType" factoryName="Python">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -161,7 +162,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="read_the_indeed_search_queue" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="whack_words_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -173,7 +174,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/read_the_indeed_search_queue.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/whack_words_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -184,11 +185,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.garfle_module_02_parse_for_job_titles" />
+        <item itemvalue="Python.whack_words_test" />
+        <item itemvalue="Python.gnarfle_one_shots" />
         <item itemvalue="Python.gnarfle_01_from_indeed_to_aws" />
         <item itemvalue="Python.garfle_module_02" />
-        <item itemvalue="Python.read_the_indeed_search_queue" />
-        <item itemvalue="Python.garfle_module_01" />
-        <item itemvalue="Python.build_an_indeed_search_list" />
       </list>
     </recent_temporary>
   </component>
