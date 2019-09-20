@@ -1,0 +1,9 @@
+SELECT indeed_search_queue.isq_pk AS indeed_search_queue_isq_pk,
+ indeed_search_queue.search_keyword_list AS indeed_search_queue_search_keyword_list,
+ indeed_search_queue.creation_date AS indeed_search_queue_creation_date,
+ indeed_search_queue.search_completed AS indeed_search_queue_search_completed,
+ indeed_search_queue.search_run_date AS indeed_search_queue_search_run_date,
+ indeed_search_queue.search_zip_code AS indeed_search_queue_search_zip_code
+FROM indeed_search_queue
+WHERE indeed_search_queue.search_completed = false
+ORDER BY indeed_search_queue.creation_date

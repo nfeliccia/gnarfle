@@ -1,7 +1,6 @@
 import time
 from datetime import datetime as dt2
 
-import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
@@ -17,44 +16,13 @@ def build_on_the_indeed_search_list():
     :return:
     """
 
-    def get_big_set_of_search_words_for_indeed():
-        """
-        This loop gives us a list of search words to send to indeed_search_queue
-        :return: list of strings
-        """
-
-        def get_single_set_of_search_words_for_indeed():
-            """
-            This function asks the user for search terms, whacks any strange characters, and then
-            splits up the first three words. Any extra ones are ignored
-            :return:A string of Keywords for an indeed search separated by a plus character
-            """
-            search_keywords = input("Enter Search Keyword List up to 3 words no punctuation\ntype 'quit' when done:")
-            # I made a module called super clean a string which uses RE to get out special characters
-            search_keywords = bst.super_clean_a_string(search_keywords)
-            # Split on spaces in case a special character was replaced with a space
-            search_keyword_list = search_keywords.split(' ')
-            # I rejoin with a plus because that's the search syntax for indeed.
-            # I limit the first few elements of the list
-            search_keywords_for_indeed = '+'.join(search_keyword_list[0:3])
-            return search_keywords_for_indeed
-
-        keep_getting_search_words = True
-        search_word_bank_gbsoswfi = []
-        while keep_getting_search_words:
-            this_set_of_search_words = get_single_set_of_search_words_for_indeed()
-            if this_set_of_search_words.find('quit') > -1:
-                keep_getting_search_words = False
-            else:
-                search_word_bank_gbsoswfi.append(this_set_of_search_words)
-        return search_word_bank_gbsoswfi
-
     def how_deep_to_search_in_geogaphic_list():
         """
         In the zip_codes table, there are a list of the downtown zipcodes of the top 20+ metro areas.
         This allows the user to enter how many of the top 20 they want to search
         :return: int
         """
+        global session_with_remulak
         # This block sets the depth of how many zip codes to search in the zip code list
         search_depth_input = input("How Deep on Geographic Search to go [enter is default of 20]:")
         # trap a blank or an alpha character
@@ -66,13 +34,12 @@ def build_on_the_indeed_search_list():
             search_result_hdtsigl = max(1, float(search_depth_input))
         return search_result_hdtsigl
 
-    session_with_remulak = bst.start_a_sql_alchemy_session()
-
-    search_word_bank = get_big_set_of_search_words_for_indeed()
+    search_word_bank = bst.get_big_set_of_search_words_for_indeed()
     search_depth = how_deep_to_search_in_geogaphic_list()
 
     # get the list of zip_codes - return a class.
-    zip_code_list = session_with_remulak.query(bst.ZipCodes).filter(bst.ZipCodes.metro_area_rank < search_depth).all()
+    zip_code_query = session_with_remulak.query(bst.ZipCodes).filter(bst.ZipCodes.metro_area_rank < search_depth)
+    zip_code_list=zip_code_query.all()
     for set_of_search_words in search_word_bank:
         for zip_code_class in zip_code_list:
             this_indeed_search_row = bst.IndeedSearchQueue()
@@ -86,7 +53,6 @@ def build_on_the_indeed_search_list():
     print("Beginning Commit")
     session_with_remulak.commit()
     print("Done Commit")
-    session_with_remulak.close()
 
 
 def move_single_job_result_from_indeed_to_database(in_single_job_result):
@@ -138,9 +104,6 @@ def query_indeed_and_grab_a_jobs_result_set(in_isq, in_page_num):
     return search_results_page_soup.find_all('item')
 
 
-
-
-
 # Set up one and only one BS session
 program_start = time.time()
 beautiful_soup_session = requests.Session()
@@ -148,13 +111,14 @@ session_with_remulak = bst.start_a_sql_alchemy_session()
 
 work_the_search_list_user_input = input("Do you want to add to the current search list: ")
 work_the_search_list_user_input_clean = bst.super_clean_a_string(work_the_search_list_user_input)
-if work_the_search_list_user_input_clean =='y':
+if work_the_search_list_user_input_clean == 'y':
     build_on_the_indeed_search_list()
 
-
 # use SQL Alchemy to find all the pending jawns
-isq_search_set = session_with_remulak.query(bst.IndeedSearchQueue).filter(
-    bst.IndeedSearchQueue.search_completed == False).order_by(bst.IndeedSearchQueue.creation_date).all()
+isq_search_set_query = session_with_remulak.query(bst.IndeedSearchQueue).filter(
+    bst.IndeedSearchQueue.search_completed == False).order_by(bst.IndeedSearchQueue.creation_date)
+
+isq_search_set = isq_search_set_query.all()
 
 for isq_search in isq_search_set:
     page_num = 0
@@ -163,7 +127,7 @@ for isq_search in isq_search_set:
         while keep_searching:
             job_result_set = query_indeed_and_grab_a_jobs_result_set(isq_search, page_num)
             # check to make sure positive results are still being received
-            if len(job_result_set) < 2 or page_num > 50:
+            if len(job_result_set) < 2 or page_num > 100:
                 keep_searching = False
             else:
                 page_num += 10

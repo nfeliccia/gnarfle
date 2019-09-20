@@ -1,18 +1,57 @@
+import datetime
 from collections import Counter
-from datetime import datetime as dt2
+from random import randrange
 
+import pandas as pd
 from nltk import PorterStemmer, ngrams, word_tokenize
 from nltk.corpus import stopwords
-from pandas import DataFrame, read_sql, ExcelWriter
 from sqlalchemy.orm.query import Query
 
 import gnarfle_00_bst_tools as bst
 from gnarfle_00_bst_tools import SQLIndeedSearchResults as SISR
 
-# I want to have stems available in the result counts.
-our_stemmer = PorterStemmer()
-# l oad in the stop words
-stop_words = set(stopwords.words('english'))
+
+def description_word_frequency_aggregator(in_result: Query):
+    """
+    This function takes in the results for a query and aggregates the single description counter.
+    :param in_result: Query
+    :return: pandas data frame
+    """
+    counter_results_sum = Counter()
+    print(f'\t\tStart building counter results list {datetime.datetime.now() - start_time}')
+    counter_results_list = [word_frequency_for_a_single_description(in_result.job_text_raw) for in_result in
+                            job_title_result_set]
+    print(f'\t\tfinished building counter results list {datetime.datetime.now() - start_time}')
+    print(f'\t\tBeginning summation of counter results {datetime.datetime.now() - start_time} ')
+    # I use the .update command because its supposed to be the fastest to sum up counters.
+    for counter_result in counter_results_list:
+        counter_results_sum.update(counter_result)
+    print(f'\t\tEnding summation of counter results {datetime.datetime.now() - start_time}')
+    print(f'\t\tBeginning stopwords scrub {datetime.datetime.now() - start_time}')
+    counter_results_scrubbed = stopwords_scrub(counter_results_sum)
+    print(f'\t\tEnding stopwords scrub {datetime.datetime.now() - start_time}')
+    result_to_present = counter_results_scrubbed.most_common(1000)
+    print(f'\t\tBeginning conversion to data frame {datetime.datetime.now() - start_time}')
+    word_count_df = pd.DataFrame(result_to_present, columns=['keyword', 'number_of_hits'])
+    print(f'\t\tEnd conversion to data frame {datetime.datetime.now() - start_time}')
+    return word_count_df
+
+
+def get_the_length(row):
+    return len(row['keyword'])
+
+
+def make_a_comparison_file_name(in_keyword_counter_list: list):
+    print(f'Begin writing comparison')
+    #set a seed for the first name.
+    comparison_filename_macfn = 'comparison'
+    for info_tuple in in_keyword_counter_list:
+        comparison_filename_macfn = comparison_filename_macfn+ info_tuple[0] + '_'
+    # needs to be tagged with appropriate filetime
+    comparison_filename_macfn = comparison_filename_macfn + '.xlsx'
+    # I put this in here to avoid the filename going over 255 and screwing up things further down the line
+    comparison_filename_macfn = comparison_filename_macfn[:255]
+    return comparison_filename_macfn
 
 
 def stopwords_scrub(in_counter: Counter):
@@ -42,7 +81,7 @@ def word_frequency_for_a_single_description(in_job_text: str):
     job_text_stems = [our_stemmer.stem(word) for word in job_text_words]
     job_text_multiples_list = []
     # I want to create phrases of two to three words
-    for phrase_length in range(2,5):
+    for phrase_length in range(2, 5):
         job_text_multiples = ngrams(job_text_words, phrase_length)
         for multiple in job_text_multiples:
             # turn the multiple from a tuple into a phrase.
@@ -52,32 +91,18 @@ def word_frequency_for_a_single_description(in_job_text: str):
     job_text_words.extend(job_text_multiples_list)
     job_text_words.extend(job_text_stems)
     job_desc_count = Counter(job_text_words)
-    return job_desc_count
-
-
-def description_word_frequency_aggregator(in_result: Query):
-    """
-    This function takes in the results for a query and aggregates the single description counter.
-    :param in_result: Query
-    :return: pandas data frame
-    """
-    type(in_result)
-    print(f'\t\tStart building counter results list')
-    counter_results_list = [word_frequency_for_a_single_description(in_result.job_text_raw) for in_result in
-                            job_title_result_set]
-    print(f'\t\tfinished building counter results list ')
-    counter_results_sum = sum(counter_results_list, Counter())
-    counter_results_scrubbed = stopwords_scrub(counter_results_sum)
-    result_to_present = counter_results_scrubbed.most_common(1000)
-    word_count_df = DataFrame(result_to_present, columns=['keyword', 'number_of_hits'])
-    return word_count_df
-
-
-def get_the_length(row):
-    return len(row['keyword'])
+    job_desc_count_scrubbed = stopwords_scrub(job_desc_count)
+    return job_desc_count_scrubbed
 
 
 # Start - --------------------
+
+# I want to have stems available in the result counts.
+our_stemmer = PorterStemmer()
+# load in the stop words
+stop_words = set(stopwords.words('english'))
+start_time = datetime.datetime.now()
+
 session_with_remulak = bst.start_a_sql_alchemy_session()
 # I want to keep the understanding that we're having  a session with the remote database remulac
 # but want to alias it since it makes the statements long.
@@ -86,38 +111,56 @@ swr = session_with_remulak
 bst.dedup_indeed_search_results(swr)
 # I set the filename up here so I can do multiple writes without having it change. 
 
-search_set = [('%python%', '%data%', '%analyst%')]
+search_set = bst.get_big_set_of_search_words_for_indeed()
 
-for search_tuple in search_set:
-    # I want to use SQL Alchemy - note the i like here makes it case insensitive.
-    print(f'Testing {search_tuple}')
-    print(f'\tFiltering {search_tuple} ')
-    job_title_result_set = swr.query(SISR.job_title, SISR.job_text_raw).filter(
-        SISR.job_title.ilike(search_tuple[0])).filter(SISR.job_title.ilike(search_tuple[1])).order_by(
-        SISR.publish_date.desc())
-    print(f'\t{job_title_result_set.count()} jobs found')
+keyword_counter_list = []
+for search_phrase in search_set:
+    # I had to put this in because too short of a search phrase returns too many darn results
+    search_words = f'%{search_phrase.replace("+", " ")}%'
+    if len(search_words) < 3:
+        break
+    # this is a quick and dirty way of handling less than three elements
+    print(f'Testing {search_words}')
+    print(f'\tFiltering {search_words} ')
+    # I want to use SQL Alchemy - note the ilike command here makes it case insensitive.
+    job_title_result_query = swr.query(SISR.job_title, SISR.job_text_raw).filter(
+        SISR.job_title.ilike(search_words)).order_by(SISR.publish_date.desc())
+    job_title_result_set = job_title_result_query.all()
+    job_title_result_count = job_title_result_query.count()
+    # I need to do the [1:-1] here because I want to whack the % argument sent to the database.
+    keyword_counter_list.append((search_words[1:-1], job_title_result_count))
+    print(f'\t{job_title_result_count} jobs found')
     print(f'\tstarting word frequency aggregation')
+    # I chose to run eaach job indivudally then sum them. I made an aggregator function
     job_title_word_count_df = description_word_frequency_aggregator(job_title_result_set)
-    job_title_word_count_df['length'] = job_title_word_count_df.apply(get_the_length, axis=1)
-
+    # I had to throw this in because calculating the length on an empty datframe was throwing a Value Error.
+    if not job_title_word_count_df.empty:
+        job_title_word_count_df['length'] = job_title_word_count_df.apply(get_the_length, axis=1)
     print(f'\tword frequency aggregation ended. ')
     print(f'\tstart pulling source data')
     # create a data frame of all of the jobs which mach the terms in the source title.
     print(f'\tcreate a data frame of all of the jobs which mach the terms in the source title.')
-    job_title_source_data = read_sql(sql=swr.query(SISR).filter(SISR.job_title.ilike(search_tuple[0])).filter(
-        SISR.job_title.ilike(search_tuple[1])).order_by(SISR.publish_date.desc()).statement, con=swr.bind)
+    job_title_source_data = pd.read_sql(
+        sql=swr.query(SISR).filter(SISR.job_title.ilike(search_words)).order_by(SISR.publish_date.desc()).statement,
+        con=swr.bind)
     print(f'\tSource jobs pulled')
     # need top combine the phrases for the filename
-    search_phrase = search_tuple[0][1:-1] + '_' + search_tuple[1][1:-1]
+    search_phrase = search_words[1:-1]
     print(f'\tBegin excel output')
-    excel_sheet_1 = f'word_{search_phrase}_in_title'
-    excel_sheet_2 = f'job_{search_phrase}_in_title'
-    filename = f'{dt2.now().year}-{dt2.now().month}-{dt2.now().day}-{dt2.now().hour}-{dt2.now().minute}-{search_phrase}.xlsx'
-    with ExcelWriter(filename, engine='xlsxwriter', mode='a+') as my_excel_homeboy:
+    keyword_count_df = pd.DataFrame(keyword_counter_list, columns=['search phrase', 'number of jobs returned'])
+    excel_sheet_1 = f'word_{search_phrase}_in_title'[:30]
+    excel_sheet_2 = f'job_{search_phrase}_in_title'[:30]
+    filename = f'{search_phrase}-{randrange(1, 100)}.xlsx'
+    with pd.ExcelWriter(filename, engine='xlsxwriter', mode='a+') as my_excel_homeboy:
         job_title_word_count_df.to_excel(my_excel_homeboy, sheet_name=excel_sheet_1[0:30], index_label='Rank')
         job_title_source_data.to_excel(my_excel_homeboy, sheet_name=excel_sheet_2[0:30], index_label='Rank')
-        my_excel_homeboy.save()
-        print(f'\tEnd Excel output')
-        print(f'{search_tuple} complete')
+    my_excel_homeboy.save()
+    print(f'\tEnd Excel output')
+    print(f'\t{search_phrase} complete')
+
+comparison_filename = make_a_comparison_file_name(keyword_counter_list)
+
+with pd.ExcelWriter(comparison_filename, engine='xlsxwriter', mode='a+') as the_comparison_file:
+    keyword_count_df.to_excel(the_comparison_file, sheet_name=comparison_filename[0:30], index=False)
 
 session_with_remulak.close()

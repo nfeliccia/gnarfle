@@ -139,6 +139,39 @@ def create_pg_login_string():
     return f'postgres+psycopg2://{user_id}:{password}@{aws_db_url}:5432/{working_db}'
 
 
+def get_big_set_of_search_words_for_indeed() -> list:
+    """
+    This loop gives us a list of search words to send to indeed_search_queue
+    :return: list of strings
+    """
+
+    def get_single_set_of_search_words_for_indeed():
+        """
+        This function asks the user for search terms, whacks any strange characters, and then
+        splits up the first three words. Any extra ones are ignored
+        :return:A string of Keywords for an indeed search separated by a plus character
+        """
+        search_keywords = input("Enter Search Keyword List up to 3 words no punctuation\ntype 'quit' when done:")
+        # I made a module called super clean a string which uses RE to get out special characters
+        search_keywords = super_clean_a_string(search_keywords)
+        # Split on spaces in case a special character was replaced with a space
+        search_keyword_list = search_keywords.split(' ')
+        # I rejoin with a plus because that's the search syntax for indeed.
+        # I limit the first few elements of the list
+        search_keywords_for_indeed = '+'.join(search_keyword_list[0:3])
+        return search_keywords_for_indeed
+
+    keep_getting_search_words = True
+    search_word_bank_gbsoswfi = []
+    while keep_getting_search_words:
+        this_set_of_search_words = get_single_set_of_search_words_for_indeed()
+        if this_set_of_search_words.find('quit') > -1:
+            keep_getting_search_words = False
+        else:
+            search_word_bank_gbsoswfi.append(this_set_of_search_words)
+    return search_word_bank_gbsoswfi
+
+
 def start_a_sql_alchemy_session():
     """ This starts  a session using SQL Alchemy tools
     """
@@ -169,7 +202,7 @@ def trim_indeed_url(self):
     return out_url
 
 
-def dedup_indeed_search_results(in_session: Session) -> object:
+def dedup_indeed_search_results(in_session: Session) :
     """
     This is a routine which removes duplicates from the indeed search results. I put it here so
     it can be called anywhere.
