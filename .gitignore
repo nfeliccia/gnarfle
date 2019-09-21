@@ -5,3 +5,4 @@ login_info.json
 
 #ignore the virutalenv
 gnarfle_venv/
+output/

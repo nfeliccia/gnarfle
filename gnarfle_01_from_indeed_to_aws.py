@@ -16,7 +16,7 @@ def build_on_the_indeed_search_list():
     :return:
     """
 
-    def how_deep_to_search_in_geogaphic_list():
+    def how_deep_to_search_in_geographic_list():
         """
         In the zip_codes table, there are a list of the downtown zipcodes of the top 20+ metro areas.
         This allows the user to enter how many of the top 20 they want to search
@@ -35,7 +35,7 @@ def build_on_the_indeed_search_list():
         return search_result_hdtsigl
 
     search_word_bank = bst.get_big_set_of_search_words_for_indeed()
-    search_depth = how_deep_to_search_in_geogaphic_list()
+    search_depth = how_deep_to_search_in_geographic_list()
 
     # get the list of zip_codes - return a class.
     zip_code_query = session_with_remulak.query(bst.ZipCodes).filter(bst.ZipCodes.metro_area_rank < search_depth)

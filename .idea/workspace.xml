@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/comparisonpython_.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python-15.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whack_words_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/garfle_module_02.py" beforeDir="false" afterPath="$PROJECT_DIR$/garfle_module_02_parse_for_job_titles.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_00_bst_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_00_bst_tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_one_shots.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_one_shots.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whack_words.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/whack_words.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comparisonpython_.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/garfle_module_02_parse_for_job_titles.py" beforeDir="false" afterPath="$PROJECT_DIR$/garfle_module_02_parse_for_job_titles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gnarfle_01_from_indeed_to_aws.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_01_from_indeed_to_aws.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python-15.xlsx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.garfle_module_02_parse_for_job_titles">
+  <component name="RunManager" selected="Python.gnarfle_01_from_indeed_to_aws">
     <configuration name="garfle_module_02" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -185,10 +183,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.gnarfle_01_from_indeed_to_aws" />
         <item itemvalue="Python.garfle_module_02_parse_for_job_titles" />
         <item itemvalue="Python.whack_words_test" />
         <item itemvalue="Python.gnarfle_one_shots" />
-        <item itemvalue="Python.gnarfle_01_from_indeed_to_aws" />
         <item itemvalue="Python.garfle_module_02" />
       </list>
     </recent_temporary>

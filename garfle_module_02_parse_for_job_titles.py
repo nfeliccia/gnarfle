@@ -43,10 +43,10 @@ def get_the_length(row):
 
 def make_a_comparison_file_name(in_keyword_counter_list: list):
     print(f'Begin writing comparison')
-    #set a seed for the first name.
+    # set a seed for the first name.
     comparison_filename_macfn = 'comparison'
     for info_tuple in in_keyword_counter_list:
-        comparison_filename_macfn = comparison_filename_macfn+ info_tuple[0] + '_'
+        comparison_filename_macfn = comparison_filename_macfn + info_tuple[0] + '_'
     # needs to be tagged with appropriate filetime
     comparison_filename_macfn = comparison_filename_macfn + '.xlsx'
     # I put this in here to avoid the filename going over 255 and screwing up things further down the line
@@ -55,7 +55,6 @@ def make_a_comparison_file_name(in_keyword_counter_list: list):
 
 
 def stopwords_scrub(in_counter: Counter):
-
     # I start with the english stopwords
     words_to_whack = stopwords.words('english')
     # Query from the database the current stopword list. I'm keeping the stopword list on the db for easy uprade
@@ -157,9 +156,11 @@ for search_phrase in search_set:
     search_phrase = search_words[1:-1]
     print(f'\tBegin excel output')
     keyword_count_df = pd.DataFrame(keyword_counter_list, columns=['search phrase', 'number of jobs returned'])
+    # I found that I was always sorting by total jobs descending so I put it in here.
+    keyword_count_df.sort_values('number of jobs returned', inplace=True, descending=False)
     excel_sheet_1 = f'word_{search_phrase}_in_title'[:30]
     excel_sheet_2 = f'job_{search_phrase}_in_title'[:30]
-    filename = f'{search_phrase}-{randrange(1, 100)}.xlsx'
+    filename = f'.\output\{search_phrase}-{randrange(1, 100)}.xlsx'
     with pd.ExcelWriter(filename, engine='xlsxwriter', mode='a+') as my_excel_homeboy:
         job_title_word_count_df.to_excel(my_excel_homeboy, sheet_name=excel_sheet_1[0:30], index_label='Rank')
         job_title_source_data.to_excel(my_excel_homeboy, sheet_name=excel_sheet_2[0:30], index_label='Rank')
@@ -167,9 +168,9 @@ for search_phrase in search_set:
     print(f'\tEnd Excel output')
     print(f'\t{search_phrase} complete')
 
-comparison_filename = make_a_comparison_file_name(keyword_counter_list)
+comparison_filename = f'all_searches_compared-{randrange(1, 100)}.xlsx'
 
-with pd.ExcelWriter(comparison_filename, engine='xlsxwriter', mode='a+') as the_comparison_file:
+with pd.ExcelWriter(f'.\output\{comparison_filename}', engine='xlsxwriter', mode='a+') as the_comparison_file:
     keyword_count_df.to_excel(the_comparison_file, sheet_name=comparison_filename[0:30], index=False)
 
 session_with_remulak.close()
