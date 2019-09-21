@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comparisonpython_.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/garfle_module_02_parse_for_job_titles.py" beforeDir="false" afterPath="$PROJECT_DIR$/garfle_module_02_parse_for_job_titles.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gnarfle_01_from_indeed_to_aws.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_01_from_indeed_to_aws.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python-15.xlsx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

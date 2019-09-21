@@ -53,6 +53,7 @@ def build_on_the_indeed_search_list():
     print("Beginning Commit")
     session_with_remulak.commit()
     print("Done Commit")
+    return search_word_bank
 
 
 def move_single_job_result_from_indeed_to_database(in_single_job_result):
@@ -112,7 +113,7 @@ session_with_remulak = bst.start_a_sql_alchemy_session()
 work_the_search_list_user_input = input("Do you want to add to the current search list: ")
 work_the_search_list_user_input_clean = bst.super_clean_a_string(work_the_search_list_user_input)
 if work_the_search_list_user_input_clean == 'y':
-    build_on_the_indeed_search_list()
+    this_session_words=build_on_the_indeed_search_list()
 
 # use SQL Alchemy to find all the pending jawns
 isq_search_set_query = session_with_remulak.query(bst.IndeedSearchQueue).filter(
