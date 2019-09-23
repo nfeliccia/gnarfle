@@ -11,6 +11,7 @@ import gnarfle_00_bst_tools as bst
 from gnarfle_00_bst_tools import SQLIndeedSearchResults as SISR
 
 
+
 def description_word_frequency_aggregator(in_result: Query):
     """
     This function takes in the results for a query and aggregates the single description counter.
@@ -71,38 +72,6 @@ def stopwords_scrub(in_counter: Counter):
     return out_counter
 
 
-def word_frequency_for_a_single_description(in_job_text: str):
-    """
-    The purpose of this function is to take in a raw string of job text scraped from the web,
-    and get a frequency word count. I chose to return a counter object because they can be summed together.
-
-    :param in_job_text: which is a string  of job text scraped from a job description
-    :return: a Counter Object with teh word counts
-    """
-    # remove all sorts of punctuation to optimize word parsing.
-    job_text_string = bst.super_clean_a_string(in_job_text)
-    # tokenize for counting
-    job_text_words = word_tokenize(job_text_string)
-    # Turn everything to lower case. Using Casefold as it handels UTF-8 better.
-    job_text_words = [word.casefold() for word in job_text_words]
-    # create a list of the stems
-    job_text_stems = [our_stemmer.stem(word) for word in job_text_words]
-    job_text_multiples_list = []
-    # I want to create phrases of two to three words
-    for phrase_length in range(2, 5):
-        job_text_multiples = ngrams(job_text_words, phrase_length)
-        for multiple in job_text_multiples:
-            # turn the multiple from a tuple into a phrase.
-            additional_phrase = ' '.join(multiple)
-            job_text_multiples_list.append(additional_phrase)
-    # add the multiples list on to the main job words. Using one list to save memory.
-    job_text_words.extend(job_text_multiples_list)
-    job_text_words.extend(job_text_stems)
-    job_desc_count = Counter(job_text_words)
-    job_desc_count_scrubbed = stopwords_scrub(job_desc_count)
-    return job_desc_count_scrubbed
-
-
 # Start - --------------------
 
 # I want to have stems available in the result counts.
@@ -155,9 +124,7 @@ for search_phrase in search_set:
     # need top combine the phrases for the filename
     search_phrase = search_words[1:-1]
     print(f'\tBegin excel output')
-    keyword_count_df = pd.DataFrame(keyword_counter_list, columns=['search phrase', 'number of jobs returned'])
-    # I found that I was always sorting by total jobs descending so I put it in here.
-    keyword_count_df.sort_values('number of jobs returned', inplace=True, descending=False)
+
     excel_sheet_1 = f'word_{search_phrase}_in_title'[:30]
     excel_sheet_2 = f'job_{search_phrase}_in_title'[:30]
     filename = f'.\output\{search_phrase}-{randrange(1, 100)}.xlsx'
@@ -169,7 +136,9 @@ for search_phrase in search_set:
     print(f'\t{search_phrase} complete')
 
 comparison_filename = f'all_searches_compared-{randrange(1, 100)}.xlsx'
-
+keyword_count_df = pd.DataFrame(keyword_counter_list, columns=['search phrase', 'number of jobs returned'])
+# I found that I was always sorting by total jobs descending so I put it in here.
+keyword_count_df.sort_values('number of jobs returned', inplace=True, ascending=False)
 with pd.ExcelWriter(f'.\output\{comparison_filename}', engine='xlsxwriter', mode='a+') as the_comparison_file:
     keyword_count_df.to_excel(the_comparison_file, sheet_name=comparison_filename[0:30], index=False)
 
