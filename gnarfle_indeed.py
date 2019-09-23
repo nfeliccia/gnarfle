@@ -223,20 +223,20 @@ def description_word_frequency_aggregator(in_result: Query):
     :return: pandas data frame
     """
     counter_results_sum = Counter()
-    print(f'\t\tStart building counter results list')
+    print(f'\t\tStart building counter results list',end='\t')
     counter_results_list = [word_frequency_for_a_single_description(in_result.job_text_raw) for in_result in
                             job_title_result_set]
     print(f'\t\tfinished building counter results list')
-    print(f'\t\tBeginning summation of counter results ')
+    print(f'\t\tBeginning summation of counter results ',end='\t')
     # I use the .update command because its supposed to be the fastest to sum up counters.
     for counter_result in counter_results_list:
         counter_results_sum.update(counter_result)
     print(f'\t\tEnding summation of counter results')
-    print(f'\t\tBeginning stopwords scrub')
+    print(f'\t\tBeginning stopwords scrub',end='\t')
     counter_results_scrubbed = stopwords_scrub(counter_results_sum)
     print(f'\t\tEnding stopwords scrub')
     result_to_present = counter_results_scrubbed.most_common(1000)
-    print(f'\t\tBeginning conversion to data frame')
+    print(f'\t\tBeginning conversion to data frame',end='\t')
     word_count_df = pd.DataFrame(result_to_present, columns=['keyword', 'number_of_hits'])
     print(f'\t\tEnd conversion to data frame')
     return word_count_df
@@ -450,7 +450,7 @@ for isq_search in isq_search_set:
     page_num = 0
     keep_searching = True
     # I want to give occasional status messages, but not so many they overwhelm
-    print(f'working {isq_search.search_keyword_list} {isq_search.search_zip_code}')
+    print(f'working {isq_search.search_keyword_list} {isq_search.search_zip_code}', end='\t')
     try:
         while keep_searching:
             job_result_set = query_indeed_and_grab_a_jobs_result_set(isq_search, page_num)
@@ -462,8 +462,8 @@ for isq_search in isq_search_set:
             for single_job_result in job_result_set:
                 move_single_job_result_from_indeed_to_database(single_job_result)
     except AttributeError as oh_skyte_1:
-        print("Bad Read")
-        with open('logfile.txt','a+',encoding='utf-8') as out_log_file:
+        print("Bad Read", end='\t')
+        with open('logfile.txt', 'a+', encoding='utf-8') as out_log_file:
             out_log_file.write(str(oh_skyte_1))
 
     isq_search.search_completed = True
@@ -508,6 +508,11 @@ for search_phrase in search_set:
     # I had to throw this in because calculating the length on an empty datframe was throwing a Value Error.
     if not job_title_word_count_df.empty:
         job_title_word_count_df['length'] = job_title_word_count_df.apply(get_the_length, axis=1)
+    else:
+        job_title_word_count_df['length']=None
+    # The most useful way is to have it sorted by hits then by length
+    job_title_word_count_df.sort_values(by=['number_of_hits', 'length'], ascending=False, inplace=True)
+    job_title_word_count_df.reindex(copy=False)
     print(f'\tword frequency aggregation ended. ')
     print(f'\tstart pulling source data')
     # create a data frame of all of the jobs which mach the terms in the source title.
@@ -536,7 +541,6 @@ keyword_count_df = pd.DataFrame(keyword_counter_list, columns=['search phrase', 
 keyword_count_df.sort_values('number of jobs returned', inplace=True, ascending=False)
 with pd.ExcelWriter(f'.\output\{comparison_filename}', engine='xlsxwriter', mode='a+') as the_comparison_file:
     keyword_count_df.to_excel(the_comparison_file, sheet_name=comparison_filename[0:30], index=False)
-
 
 # KEEP closes at end of program.
 

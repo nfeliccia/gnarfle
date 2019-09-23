@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/depricated_code/gnarfle_00_bst_tools.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/garfle_module_02_parse_for_job_titles.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/garfle_module_02_parse_for_job_titles.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_00_bst_tools.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_01_from_indeed_to_aws.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/gnarfle_01_from_indeed_to_aws.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_a0_commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_a0_commands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gnarfle_a0_commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/gnarfle_a0_commands.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gnarfle_indeed.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_indeed.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_one_shots.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_one_shots.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login_info.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/read_the_indeed_search_queue.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/read_the_indeed_search_queue.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whack_words_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/whack_words_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whack_words.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/whack_words.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whack_words_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/whack_words_test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -178,7 +172,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/whack_words_test.py" />
+      <option name="SCRIPT_NAME" value="E:\Software\gnarfle\depricated_code\whack_words_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -253,6 +247,11 @@
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/depricated_code/garfle_module_02_parse_for_job_titles.py</url>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/gnarfle_indeed.py</url>
+          <line>144</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-defaults>
