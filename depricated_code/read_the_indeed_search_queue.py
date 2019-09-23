@@ -1,5 +1,5 @@
-import gnarfle_00_bst_tools as bst
-from gnarfle_00_bst_tools import IndeedSearchQueue as ISQ
+from depricated_code import gnarfle_00_bst_tools as bst
+from depricated_code.gnarfle_00_bst_tools import IndeedSearchQueue as ISQ
 
 session_with_remulak = bst.start_a_sql_alchemy_session()
 

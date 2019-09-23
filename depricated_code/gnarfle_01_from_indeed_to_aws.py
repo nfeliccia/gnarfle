@@ -4,7 +4,7 @@ from datetime import datetime as dt2
 import requests
 from bs4 import BeautifulSoup
 
-import gnarfle_00_bst_tools as bst
+from depricated_code import gnarfle_00_bst_tools as bst
 
 
 def build_on_the_indeed_search_list():

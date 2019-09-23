@@ -3,12 +3,12 @@ from collections import Counter
 from random import randrange
 
 import pandas as pd
-from nltk import PorterStemmer, ngrams, word_tokenize
+from nltk import PorterStemmer
 from nltk.corpus import stopwords
 from sqlalchemy.orm.query import Query
 
-import gnarfle_00_bst_tools as bst
-from gnarfle_00_bst_tools import SQLIndeedSearchResults as SISR
+from depricated_code import gnarfle_00_bst_tools as bst
+from depricated_code.gnarfle_00_bst_tools import SQLIndeedSearchResults as SISR
 
 
 
