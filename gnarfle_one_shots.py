@@ -5,7 +5,7 @@ This file contains code used once for a specific purose.
 """
 import pandas as pd
 
-import gnarfle_00_bst_tools as bst
+from depricated_code import gnarfle_00_bst_tools as bst
 
 
 def create_indeed_search_queue():
