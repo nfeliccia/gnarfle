@@ -30,14 +30,16 @@ def input_login_elements(in_file_ile):
     db_string_ile = input("Enter full db string:")
     user_id_ile = input("Enter username:")
     my_pass_ile = input("password:")
-    pw_df_creator_dict = {'db_string': db_string_ile, 'user_id': user_id_ile, 'my_pass': my_pass_ile}
+    working_db = input("working db:")
+    pw_df_creator_dict = {'db_string': db_string_ile, 'user_id': user_id_ile, 'my_pass': my_pass_ile,
+                          'working_db': working_db}
     with open(in_file_ile, 'w', encoding='utf-8') as in_file_ile_file_object:
         json.dump(pw_df_creator_dict, in_file_ile_file_object)
     return True
 
 
 # This is the main function
-def awlc(pw_file_name_ls,askok=False):
+def awlc(pw_file_name_ls, askok=False):
     """
 
     :param pw_file_name_ls: a filename for the text login
@@ -60,19 +62,17 @@ def awlc(pw_file_name_ls,askok=False):
         # and return the reading of the results as the tope
         if askok:
             print("Current user information exists")
-            db_string, user_id, my_pass, working_db  = read_password_json_file(pw_file_name_ls)
+            db_string, user_id, my_pass, working_db = read_password_json_file(pw_file_name_ls)
             my_pass_masked = len(my_pass) * '*'
-            print(
-                f'db_string:{db_string} \tYour User ID is {user_id} \tYour password is',
+            print(f'db_string:{db_string} \tYour User ID is {user_id} \tYour password is',
                 f'{my_pass_masked}\t Target Database is {working_db}')
 
         if askok:
             proceed = input("Go forward with this information [Y/N]:").lower()
             if proceed == "y":
-                return (db_string, user_id, my_pass,working_db)
+                return (db_string, user_id, my_pass, working_db)
             else:
                 input_login_elements(pw_file_name_ls)
                 return read_password_json_file(pw_file_name_ls)
         else:
             return read_password_json_file(pw_file_name_ls)
-
