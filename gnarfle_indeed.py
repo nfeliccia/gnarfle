@@ -368,6 +368,12 @@ def stopwords_scrub(in_counter: Counter):
 
 
 def super_clean_a_string(in_string: str):
+    """
+    This is a little utility I made which gets rid of whitespace on both sides and uses
+    casefold instead of .lower because casefold handles UTF-8 so much better.
+    :param in_string:
+    :return:
+    """
     out_string = re.sub(r'[,.;@%#?!&$()^*/’\':·\-]+\ *', " ", in_string).rstrip().lstrip().casefold()
     return out_string
 
