@@ -530,7 +530,7 @@ for search_phrase in search_set:
     # need top combine the phrases for the filename
     search_phrase = search_words[1:-1]
     print(f'\tBegin excel output')
-
+    #ouput the results to an excel file
     excel_sheet_1 = f'word_{search_phrase}_in_title'[:30]
     excel_sheet_2 = f'job_{search_phrase}_in_title'[:30]
     filename = f'.\output\{search_phrase}-{randrange(1, 100)}.xlsx'

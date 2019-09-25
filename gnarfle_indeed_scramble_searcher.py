@@ -1,6 +1,7 @@
 import re
 from collections import namedtuple
 from itertools import permutations
+from random import randrange
 
 import pandas as pd
 from sqlalchemy import Integer, String, Date, Float, Column
@@ -73,6 +74,9 @@ class SQLIndeedSearchResults(Base):
 
 
 session_with_remulak = start_a_sql_alchemy_session()
+
+
+
 scramble_list_words = []
 scramble_results_tuple_list = []
 scramble_phrase_list = []
@@ -105,13 +109,15 @@ for scramble_phrase in scramble_phrase_list:
         ThisResult = ScrambleResult(scramble_phrase=f'"{scramble_words}"',
                                     ocurances_in_title=scramble_list_words_query_count,
                                     ocurances_in_text=scramble_list_body_query_count)
+        print(
+            f'Scramble Phrase {ThisResult.scramble_phrase} \t "Title Occurances" {getattr(ThisResult, "ocurances_in_title")} \t Text Occurances {ThisResult[2]}')
         scramble_results_tuple_list.append(ThisResult)
 
-for named_tuple in scramble_results_tuple_list:
-    print(
-        f'Scramble Phrase {named_tuple.scramble_phrase} \t "Title Occurances" {getattr(named_tuple, "ocurances_in_title")} \t {named_tuple[2]}')
-
-scramble_df = pd.DataFrame(scramble_results_tuple_list,index='scramble_phrase').sort_values(by=['ocurances_in_title','ocurances_in_text'])
-print('DataFrame',scramble_df)
-
+scramble_df = pd.DataFrame(scramble_results_tuple_list)
+scramble_df.sort_values(by=['ocurances_in_title', 'ocurances_in_text'], ascending=False, inplace=True)
+scramble_df.drop_duplicates(inplace=True)
+print('DataFrame', scramble_df)
+comparison_filename = f'permutations_compared-{randrange(1, 100)}.xlsx'
+with pd.ExcelWriter(f'.\output\{comparison_filename}', engine='xlsxwriter', mode='a+') as the_comparison_file:
+    scramble_df.to_excel(the_comparison_file, sheet_name=comparison_filename[0:30], index=False)
 session_with_remulak.close()
