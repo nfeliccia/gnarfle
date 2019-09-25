@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scramble_improve.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_indeed.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_indeed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gnarfle_indeed_scramble_searcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_indeed_scramble_searcher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logfile.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -159,7 +158,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="whack_words_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="scramble_improve" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -171,7 +170,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\Software\gnarfle\depricated_code\whack_words_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scramble_improve.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -183,10 +182,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.gnarfle_indeed_scramble_searcher" />
+        <item itemvalue="Python.scramble_improve" />
         <item itemvalue="Python.gnarfle_indeed" />
         <item itemvalue="Python.garfle_module_02_parse_for_job_titles" />
         <item itemvalue="Python.gnarfle_01_from_indeed_to_aws" />
-        <item itemvalue="Python.whack_words_test" />
       </list>
     </recent_temporary>
   </component>
