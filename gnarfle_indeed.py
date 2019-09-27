@@ -86,8 +86,9 @@ else:
     search_set = this_session_words.copy()
 
 for search_phrase in search_set:
-    # I had to put this in because too short of a search phrase returns too many darn results
+
     search_words = f'%{search_phrase.replace("+", " ")}%'
+    # I had to put this in because too short of a search phrase returns too many darn results
     if len(search_words) < 3:
         break
     print(f'Testing {search_words}')
@@ -114,7 +115,7 @@ for search_phrase in search_set:
     print(f'\tword frequency aggregation ended. ')
     print(f'\tstart pulling source data')
     # create a data frame of all of the jobs which mach the terms in the source title.
-    print(f'\tcreate a data frame of all of the jobs which mach the terms in the source title.')
+    print(f'\tcreate a data frame of all of the jobs which mach the EXACT terms in the source title.')
     job_title_source_data = pd.read_sql(
         sql=swr.query(SiSr.company, SiSr.job_title_row, SiSr.publish_date, SiSr.job_title, SiSr.extracted_url,
                       SiSr.job_text_raw).filter(SiSr.job_title.ilike(search_words)).order_by(
