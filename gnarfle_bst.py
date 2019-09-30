@@ -230,13 +230,13 @@ def description_word_frequency_aggregator(in_job_title_result_set: Query):
     for counter_result in counter_results_list:
         counter_results_sum.update(counter_result)
     print(f'\t\tEnding summation of counter results')
-    print(f'\t\tBeginning stopwords scrub', end='\t')
-    print(f'\t\tEnding stopwords scrub')
-    result_to_present = counter_results_sum.most_common(1100)
+    result_to_present = counter_results_sum.most_common(1300)
     print(f'\t\tBeginning conversion to data frame', end='\t')
     word_count_df = pd.DataFrame(result_to_present, columns=['keyword', 'number_of_hits'])
-    word_count_df = stopwords_scrub(word_count_df)
     print(f'\t\tEnd conversion to data frame')
+    print(f'\t\tBeginning stopwords scrub', end='\t')
+    word_count_df = stopwords_scrub(word_count_df)
+    print(f'\t\tEnding stopwords scrub')
     return word_count_df
 
 
@@ -365,12 +365,13 @@ def stopwords_scrub(in_df: pd.DataFrame):
     # Query from the database the current stopword list. I'm keeping the stopword list on the db for easy uprade
     whack_words_query = swr.query(WhackWords.whack_word)
     # I combined the .all with the query and the list iterator because the query comes back as a list of tuples.
-    whack_words_list = [word_tuple[0] for word_tuple in whack_words_query.all()]
+    whack_words_list = [wwql.whack_word for wwql in whack_words_query.all()]
     words_to_whack.extend(whack_words_list)
     # I sort so the shortest words and presumably the most frequent will be at
+    words_to_whack.sort(key=len)
     # the beginning of the list and caught first.
-    words_to_whack_df = pd.DataFrame(words_to_whack, columns=['bad_word'])
-    out_df = in_df[~in_df['keyword'].isin(words_to_whack_df['bad_word'])]
+    words_to_whack_series = pd.Series(words_to_whack)
+    out_df = in_df[~in_df['keyword'].isin(words_to_whack_series)]
     out_df.reindex(copy=False)
     swr.close()
     return out_df

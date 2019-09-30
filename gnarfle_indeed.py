@@ -3,6 +3,7 @@ from random import randrange
 
 import pandas as pd
 import requests
+from bs4 import ResultSet
 
 from gnarfle_bst import IndeedSearchQueue
 from gnarfle_bst import SQLIndeedSearchResults
@@ -23,6 +24,7 @@ session_with_remulak = start_a_sql_alchemy_session()
 # list initialization
 keyword_counter_list = []
 this_session_words = []
+old_job_result_set = []
 # I alias this to make shorter queries.
 SiSr = SQLIndeedSearchResults
 # I want to have stems available in the result counts.
@@ -53,13 +55,18 @@ if isq_search_set_query.count() > 0:
             while keep_searching:
                 job_result_set = query_indeed_and_grab_a_jobs_result_set(isq_search, page_num)
                 # check to make sure positive results are still being received
-                if len(job_result_set) < 2 or page_num > 100:
+
+                if len(job_result_set) < 2 or page_num > 30:
+                    keep_searching = False
+                elif job_result_set == old_job_result_set:
+                    print("DUPiddy dup dup", page_num, len(job_result_set))
                     keep_searching = False
                 else:
                     page_num += 10
-                for single_job_result in job_result_set:
-                    move_single_job_result_from_indeed_to_database(single_job_result, beautiful_soup_session,
-                                                                   session_with_remulak)
+                    old_job_result_set = job_result_set.copy()
+                    for single_job_result in job_result_set:
+                        move_single_job_result_from_indeed_to_database(single_job_result, beautiful_soup_session,
+                                                                       session_with_remulak)
         except AttributeError as oh_skyte_1:
             print("Bad Read", end='\t')
             with open('logfile.txt', 'a+', encoding='utf-8') as out_log_file:
@@ -111,7 +118,7 @@ for search_phrase in search_set:
         job_title_word_count_df['length'] = None
     # The most useful way is to have it sorted by hits then by length
     job_title_word_count_df.sort_values(by=['number_of_hits', 'length'], ascending=False, inplace=True)
-    job_title_word_count_df.reset_index(drop=True,inplace=True)
+    job_title_word_count_df.reset_index(drop=True, inplace=True)
     print(f'\tword frequency aggregation ended. ')
     print(f'\tstart pulling source data')
     # create a data frame of all of the jobs which mach the terms in the source title.
