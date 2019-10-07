@@ -171,6 +171,8 @@ def build_on_the_indeed_search_list(in_session):
     print("... search queue update complete")
     return search_word_bank
 
+def cls():
+    print(f'\n'*40)
 
 def create_headers_for_the_browser():
     # headers for the Browser.
@@ -252,7 +254,7 @@ def get_big_set_of_search_words_for_indeed() -> list:
         splits up the first three words. Any extra ones are ignored
         :return:A string of Keywords for an indeed search separated by a plus character
         """
-        search_keywords = input("Enter Search Keyword List up to 3 words no punctuation\ntype 'quit' when done:")
+        search_keywords = input("\nEnter Search Keyword List up to 3 words no punctuation\ntype 'quit' when done:\t")
         # I made a module called super clean a string which uses RE to get out special characters
         search_keywords = super_clean_a_string(search_keywords)
         # Split on spaces in case a special character was replaced with a space

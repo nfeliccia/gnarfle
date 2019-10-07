@@ -3,11 +3,11 @@ from random import randrange
 
 import pandas as pd
 import requests
-from bs4 import ResultSet
 
 from gnarfle_bst import IndeedSearchQueue
 from gnarfle_bst import SQLIndeedSearchResults
 from gnarfle_bst import build_on_the_indeed_search_list
+from gnarfle_bst import cls
 from gnarfle_bst import dedup_indeed_search_results
 from gnarfle_bst import description_word_frequency_aggregator
 from gnarfle_bst import get_big_set_of_search_words_for_indeed
@@ -34,6 +34,7 @@ SiSr = SQLIndeedSearchResults
 
 # I start off by asking the user to augment the current search list, this gives the option to go right to the
 # counting section.
+cls()
 work_the_search_list_user_input = input("Do you want to add to the current search list: ")
 work_the_search_list_user_input_clean = super_clean_a_string(work_the_search_list_user_input)
 if work_the_search_list_user_input_clean == 'y':
@@ -98,7 +99,7 @@ for search_phrase in search_set:
     # I had to put this in because too short of a search phrase returns too many darn results
     if len(search_words) < 3:
         break
-    print(f'Testing {search_words}')
+    print('\n', f'Testing {search_words}')
     print(f'\tFiltering {search_words} ')
     # I want to use SQL Alchemy - note the ilike command here makes it case insensitive.
     job_title_result_query = swr.query(SiSr.job_title, SiSr.job_text_raw).filter(

@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/depricated_code/gnarfle_title_sercher.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/extend_wack_words.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gnarfle_bst.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_bst.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gnarfle_indeed.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_indeed.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gnarfle_indeed_scramble_searcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_indeed_scramble_searcher.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logfile.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gnarfle_indeed">
+  <component name="RunManager" selected="Python.gnarfle_bst">
     <configuration name="extend_wack_words" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -77,7 +76,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="garfle_module_02_parse_for_job_titles" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="gnarfle_bst" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -89,7 +88,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\Software\gnarfle\depricated_code\garfle_module_02_parse_for_job_titles.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gnarfle_bst.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -184,11 +183,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.gnarfle_indeed" />
+        <item itemvalue="Python.gnarfle_bst" />
         <item itemvalue="Python.gnarfle_indeed_scramble_searcher" />
+        <item itemvalue="Python.gnarfle_indeed" />
         <item itemvalue="Python.extend_wack_words" />
         <item itemvalue="Python.scramble_improve" />
-        <item itemvalue="Python.garfle_module_02_parse_for_job_titles" />
       </list>
     </recent_temporary>
   </component>
