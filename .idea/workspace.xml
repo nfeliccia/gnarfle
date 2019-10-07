@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/gnarfle.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/giss_intro.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/help_menu.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/intro.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQL/Nic_SQL_example.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/gnarfle_bst.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_bst.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gnarfle_indeed.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_indeed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gnarfle_indeed_scramble_searcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_indeed_scramble_searcher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logfile.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,13 +37,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Software\gnarfle" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Software\gnarfle\input" />
       <recent name="E:\Software\gnarfle\depricated_code" />
       <recent name="E:\Software\gnarfle" />
       <recent name="E:\Software\gnarfle\SQL" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Software\gnarfle" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -54,7 +59,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gnarfle_bst">
+  <component name="RunManager" selected="Python.gnarfle">
     <configuration name="extend_wack_words" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -68,6 +73,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/extend_wack_words.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="gnarfle" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="gnarfle" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gnarfle.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -160,34 +186,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="scramble_improve" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="gnarfle" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="E:\Software\gnarfle\depricated_code\scramble_improve.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.gnarfle" />
         <item itemvalue="Python.gnarfle_bst" />
         <item itemvalue="Python.gnarfle_indeed_scramble_searcher" />
         <item itemvalue="Python.gnarfle_indeed" />
         <item itemvalue="Python.extend_wack_words" />
-        <item itemvalue="Python.scramble_improve" />
       </list>
     </recent_temporary>
   </component>

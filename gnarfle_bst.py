@@ -339,6 +339,11 @@ def query_indeed_and_grab_a_jobs_result_set(in_isq, in_page_num):
     search_results_page_soup = BeautifulSoup(search_results_page_tree.content, 'lxml')
     return search_results_page_soup.find_all('item')
 
+def show_off(in_file_name):
+    with open(in_file_name, 'r', encoding='utf-8') as show_file_name:
+        for line in show_file_name.readlines():
+            print(line, end='')
+
 
 def super_clean_a_string(in_string: str):
     out_string = re.sub(r'[,.;@%#?!&$()^*/\|’\':·\-]+\ *', " ", in_string).rstrip().lstrip().casefold()

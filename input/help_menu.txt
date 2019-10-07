@@ -1,0 +1,7 @@
+*************************************************
+Command list:
+? or help - show this list
+ss or scramble_searcher  - start the scramble searcher
+kk or keywords - search the database for keywords associated with titles
+qq or quit - end program
+*************************************************
