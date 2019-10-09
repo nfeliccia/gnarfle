@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/gnarfle.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/giss_intro.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/help_menu.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input/intro.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQL/Nic_SQL_example.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GTG Engineering Notebook.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gnarfle_the_Garthok.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GtG_implementation.docx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/gnarfle_bst.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_bst.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_indeed.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_indeed.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_indeed_scramble_searcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_indeed_scramble_searcher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logfile.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

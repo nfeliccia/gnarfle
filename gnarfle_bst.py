@@ -294,7 +294,6 @@ def make_a_comparison_file_name(in_keyword_counter_list: list):
 
 def move_single_job_result_from_indeed_to_database(in_single_job_result, in_bs_session, in_swr):
     """
-
     :param in_single_job_result:
     :return:
     """
