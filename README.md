@@ -1,4 +1,5 @@
 # gnarfle
+for full information read Gnarfle_Documentation.pdf or .docx
 What is Gnarfle?
 
 Gnarfle is a software platform which aids job seekers in choosing the best job title and words for their resume to be selected by today’s modern Applicant Tracking Systems. (ATS) 
