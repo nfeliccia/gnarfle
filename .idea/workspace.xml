@@ -2,12 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gnarfle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gnarfle.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GTG Engineering Notebook.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gnarfle_the_Garthok.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GtG_implementation.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gnarfle_bst.py" beforeDir="false" afterPath="$PROJECT_DIR$/gnarfle_bst.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logfile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versioni_00/blunt_skull_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/blunt_skull_tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versioni_00/description_to_count_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/description_to_count_set.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versioni_00/forbidden_words_uploader.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/forbidden_words_uploader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versioni_00/indeed_search_executer.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/indeed_search_executer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versioni_00/indeed_search_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/indeed_search_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versioni_00/indeed_search_set_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/indeed_search_set_builder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versioni_00/job_description_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/job_description_reader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versioni_00/sherpa.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/sherpa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versioni_00/sql_alchemy_examples.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/sql_alchemy_examples.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +35,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gnarfle_venv" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
