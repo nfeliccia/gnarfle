@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="869db707-2ddf-4e85-b700-72708b6fc648" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gnarfle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gnarfle.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qvc_class.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qvc_crawler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qvcjobs.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/selenium_open.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/blunt_skull_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/blunt_skull_tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/description_to_count_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/description_to_count_set.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/forbidden_words_uploader.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/forbidden_words_uploader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/indeed_search_executer.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/indeed_search_executer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/indeed_search_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/indeed_search_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/indeed_search_set_builder.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/indeed_search_set_builder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/job_description_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/job_description_reader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/sherpa.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/sherpa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versioni_00/sql_alchemy_examples.py" beforeDir="false" afterPath="$PROJECT_DIR$/depricated_code/versioni_00/sql_alchemy_examples.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -34,20 +28,21 @@
   <component name="ProjectId" id="1QVZoIaUV5WFl5n2p494XLfcHCl" />
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="F:/Qurate Retail Group - Workday.html" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Software\gnarfle\input" />
-      <recent name="E:\Software\gnarfle\depricated_code" />
-      <recent name="E:\Software\gnarfle" />
-      <recent name="E:\Software\gnarfle\SQL" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Software\gnarfle" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Software\gnarfle\depricated_code" />
+      <recent name="E:\Software\gnarfle\input" />
+      <recent name="E:\Software\gnarfle" />
+      <recent name="E:\Software\gnarfle\SQL" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -62,28 +57,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gnarfle">
-    <configuration name="extend_wack_words" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="gnarfle" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/extend_wack_words.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.qvc_crawler">
     <configuration name="gnarfle" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="gnarfle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -118,27 +92,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gnarfle_bst.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="gnarfle_indeed" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="gnarfle" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gnarfle_indeed.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -189,13 +142,55 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="qvc_crawler" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="gnarfle" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/qvc_crawler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="selenium_open" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="gnarfle" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/selenium_open.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.qvc_crawler" />
+        <item itemvalue="Python.selenium_open" />
         <item itemvalue="Python.gnarfle" />
         <item itemvalue="Python.gnarfle_bst" />
         <item itemvalue="Python.gnarfle_indeed_scramble_searcher" />
-        <item itemvalue="Python.gnarfle_indeed" />
-        <item itemvalue="Python.extend_wack_words" />
       </list>
     </recent_temporary>
   </component>
